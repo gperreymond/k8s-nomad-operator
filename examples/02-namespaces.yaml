@@ -5,7 +5,7 @@ metadata:
   name: pikachu
   namespace: kube-public
 spec:
-  provider: nomad-server-europe
+  provider: europe-paris
   description: "Pikachu est un petit Pokémon joufflu qui ressemble à un rongeur."
   meta:
     Type: 'Electric'
@@ -18,5 +18,5 @@ metadata:
   name: ronflex
   namespace: kube-public
 spec:
-  provider: nomad-server-europe
+  provider: europe-paris
   description: "Ronflex est un Pokémon très pacifique, mais très paresseux aussi."

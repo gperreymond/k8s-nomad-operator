@@ -84,9 +84,3 @@ spec:
     - jsonPath: .spec.address
       name: Address
       type: string
-    - jsonPath: .spec.region
-      name: Region
-      type: string
-    - jsonPath: .spec.skip_verify
-      name: SkipVerify
-      type: boolean

@@ -1,0 +1,21 @@
+services:
+
+  nomad-server:
+    image: 'hashicorp/nomad:1.9.3'
+    container_name: 'nomad-server'
+    command: 'agent -config=/etc/nomad/server.hcl'
+    privileged: true
+    environment:
+      - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+    volumes:
+      - './configs/nomad-server.hcl:/etc/nomad/server.hcl:ro'
+      - 'nomad_data:/opt/nomad'
+    ports:
+      - '4646:4646/tcp'
+      - '4647:4647/tcp'
+      - '4648:4648/tcp'
+      - '4648:4648/udp'
+
+volumes:
+
+  nomad_data: {}

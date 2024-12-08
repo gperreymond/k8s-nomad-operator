@@ -6,4 +6,5 @@ $ minikube start --driver=docker --kubernetes-version=v1.31.3
 $ kubectx minikube
 $ kubectl apply -f manifests
 $ kubectl apply -f examples
+$ docker compose up -d --force-recreate
 ```

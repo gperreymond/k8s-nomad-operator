@@ -71,9 +71,3 @@ spec:
     - jsonPath: .spec.provider
       name: Provider
       type: string
-    - jsonPath: .spec.description
-      name: Description
-      type: string
-    - jsonPath: .spec.quota
-      name: Quota
-      type: string
