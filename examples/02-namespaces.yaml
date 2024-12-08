@@ -3,17 +3,20 @@ apiVersion: nomad.hashicorp.com/v1
 kind: NomadNamespace
 metadata:
   name: pikachu
-  namespace: default
+  namespace: kube-public
 spec:
-  name: pikachu
+  provider: nomad-server-europe
   description: "Pikachu est un petit Pokémon joufflu qui ressemble à un rongeur."
+  meta:
+    Type: 'Electric'
+    Gender: 'Male'
 
 ---
 apiVersion: nomad.hashicorp.com/v1
 kind: NomadNamespace
 metadata:
   name: ronflex
-  namespace: default
+  namespace: kube-public
 spec:
-  name: ronflex
+  provider: nomad-server-europe
   description: "Ronflex est un Pokémon très pacifique, mais très paresseux aussi."

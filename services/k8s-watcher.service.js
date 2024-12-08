@@ -3,15 +3,8 @@ const { KubeConfig, Watch } = require('@kubernetes/client-node')
 module.exports = {
   name: 'k8s-watcher',
   settings: {
-    // https://registry.terraform.io/providers/hashicorp/nomad/latest/docs
-    // provider: {
-    //   address: 'http://localhost:4646', // NOMAD_ADDR
-    //   region: '', // NOMAD_REGION
-    //   http_auth: '', // NOMAD_HTTP_AUTH
-    //   skip_verify: false, // NOMAD_SKIP_VERIFY
-    //   secret_id: '' // NOMAD_TOKEN
-    // },
     resources: [
+      'nomadproviders',
       'nomadnamespaces'
     ] // Kubernetes resources to monitor
   },
