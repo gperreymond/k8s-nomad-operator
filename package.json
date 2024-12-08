@@ -6,15 +6,18 @@
   "author": "Gilles Perreymond <gperreymond@gmail.com>",
   "private": true,
   "scripts": {
-    "standard": "standard"
+    "standard": "standard",
+    "start:dev": "moleculer-runner --repl --hot --config moleculer.config.js services"
   },
   "dependencies": {
+    "@kubernetes/client-node": "0.22.3",
     "moleculer": "0.14.35",
-    "moleculer-repl": "0.7.4",
-    "moleculer-web": "0.10.7"
+    "moleculer-web": "0.10.7",
+    "nconf": "0.12.1"
   },
   "devDependencies": {
     "jest": "29.7.0",
+    "moleculer-repl": "0.7.4",
     "standard": "17.1.2"
   }
 }

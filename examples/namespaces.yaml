@@ -1,0 +1,19 @@
+---
+apiVersion: nomad.hashicorp.com/v1
+kind: NomadNamespace
+metadata:
+  name: pikachu
+  namespace: default
+spec:
+  name: pikachu
+  description: "Pikachu est un petit Pokémon joufflu qui ressemble à un rongeur."
+
+---
+apiVersion: nomad.hashicorp.com/v1
+kind: NomadNamespace
+metadata:
+  name: ronflex
+  namespace: default
+spec:
+  name: ronflex
+  description: "Ronflex est un Pokémon très pacifique, mais très paresseux aussi."
