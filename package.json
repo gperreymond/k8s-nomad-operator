@@ -1,0 +1,20 @@
+{
+  "name": "k8s-nomad-operator",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:gperreymond/k8s-nomad-operator.git",
+  "author": "Gilles Perreymond <gperreymond@gmail.com>",
+  "private": true,
+  "scripts": {
+    "standard": "standard"
+  },
+  "dependencies": {
+    "moleculer": "0.14.35",
+    "moleculer-repl": "0.7.4",
+    "moleculer-web": "0.10.7"
+  },
+  "devDependencies": {
+    "jest": "29.7.0",
+    "standard": "17.1.2"
+  }
+}
