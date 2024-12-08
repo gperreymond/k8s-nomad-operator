@@ -1,7 +1,7 @@
 const { KubeConfig, Watch } = require('@kubernetes/client-node')
 
 module.exports = {
-  name: 'k8s-watcher',
+  name: 'KubernetesWatcher',
   settings: {
     resources: [
       'nomadproviders',
@@ -12,7 +12,15 @@ module.exports = {
     // Event triggered by CRD changes
     'k8s.crd.modified': {
       async handler (payload) {
-        this.logger.info('CRD modified:', payload)
+        const { type, object: { metadata: { name }, kind } } = payload
+        const service = kind
+        const action = type.toLowerCase()
+        const params = payload.object.spec
+        this.logger.info('crd modified', service, action)
+        await this.broker.call(`${service}.${action}`, {
+          name,
+          params
+        })
       }
     }
   },
@@ -49,16 +57,16 @@ module.exports = {
   },
 
   created () {
-    this.logger.info('k8s-watcher service created.')
+    this.logger.info('KubernetesWatcher service created.')
   },
 
   async started () {
-    this.logger.info('k8s-watcher service started.')
+    this.logger.info('KubernetesWatcher service started.')
     this.initK8sWatcher()
   },
 
   async stopped () {
-    this.logger.info('k8s-watcher service stopped.')
+    this.logger.info('KubernetesWatcher service stopped.')
     if (this.unwatch) this.unwatch() // Stop the Kubernetes watcher
   }
 }

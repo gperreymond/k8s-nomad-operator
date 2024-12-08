@@ -2,3 +2,5 @@
 devbox.lock
 
 node_modules
+
+bin
