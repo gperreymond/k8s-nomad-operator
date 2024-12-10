@@ -1,6 +1,6 @@
 module.exports = {
   name: 'NomadNamespace',
   actions: {
-    added: require('./actions/namespace/added')
+    reconcile: require('./actions/namespace/reconcile')
   }
 }

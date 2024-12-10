@@ -5,7 +5,8 @@ module.exports = {
   settings: {
     resources: [
       'nomadproviders',
-      'nomadnamespaces'
+      'nomadnamespaces',
+      'nomadvariables'
     ] // Kubernetes resources to monitor
   },
   events: {
@@ -14,7 +15,7 @@ module.exports = {
       async handler (payload) {
         const { type, object: { metadata: { name }, kind } } = payload
         const service = kind
-        const action = type.toLowerCase()
+        const action = type === 'DELETED' ? 'delete' : 'reconcile'
         const params = payload.object.spec
         this.logger.info('crd modified', service, action)
         await this.broker.call(`${service}.${action}`, {

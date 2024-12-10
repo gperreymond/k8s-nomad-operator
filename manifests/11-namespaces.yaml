@@ -5,11 +5,6 @@ metadata:
   name: nomadnamespaces.nomad.hashicorp.com
 spec:
   group: nomad.hashicorp.com
-  scope: Namespaced
-  names:
-    plural: nomadnamespaces
-    singular: nomadnamespace
-    kind: NomadNamespace
   versions:
     - name: v1
       served: true
@@ -23,40 +18,47 @@ spec:
               properties:
                 provider:
                   type: string
-                  description: "Specifies the provider to target."
+                name:
+                  type: string
                 description:
                   type: string
-                  description: "Specifies an optional human-readable description of the namespace."
+                quota:
+                  type: string
                 meta:
                   type: object
                   additionalProperties:
                     type: string
-                  description: "Optional object with string keys and values of metadata to attach to the namespace."
                 capabilities:
                   type: object
                   properties:
-                    enabledTaskDrivers:
+                    enabled_task_drivers:
                       type: array
                       items:
                         type: string
-                      description: "List of task drivers allowed in the namespace. If empty all task drivers are allowed."
-                    disabledTaskDrivers:
+                    disabled_task_drivers:
                       type: array
                       items:
                         type: string
-                      description: "List of task drivers disabled in the namespace."
-                    enabledNetworkModes:
+                node_pool_config:
+                  type: object
+                  properties:
+                    default:
+                      type: string
+                    allowed:
                       type: array
                       items:
                         type: string
-                      description: "List of network modes allowed in the namespace. If empty all network modes are allowed."
-                    disabledNetworkModes:
+                    denied:
                       type: array
                       items:
                         type: string
-                      description: "List of network modes disabled in the namespace."
-                  description: "Specifies capabilities allowed in the namespace. These values are checked at job submission."
               required:
                 - provider
-          required:
-            - spec
+                - name
+  scope: Namespaced
+  names:
+    plural: nomadnamespaces
+    singular: nomadnamespace
+    kind: NomadNamespace
+    shortNames:
+    - nn

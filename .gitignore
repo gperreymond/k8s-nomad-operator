@@ -3,4 +3,5 @@ devbox.lock
 
 node_modules
 
-bin
+.terraform
+.terraform.lock.hcl

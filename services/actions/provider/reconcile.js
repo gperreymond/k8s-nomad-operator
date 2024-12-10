@@ -14,10 +14,10 @@ const handler = async function (ctx) {
         name: `provider-${name}`
       },
       type: 'Opaque',
-      data: {}
+      stringData: {}
     }
     Object.keys(params).map(key => {
-      body.data[key] = Buffer.from(params[key].toString()).toString('base64')
+      body.stringData[key] = params[key].toString()
       return true
     })
     try {
@@ -26,6 +26,7 @@ const handler = async function (ctx) {
       if (err.response && err.response.statusCode === 404) {
         await k8sApi.createNamespacedSecret('nomad-system', body)
       }
+      throw err
     }
     return {
       success: true
