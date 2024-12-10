@@ -7,27 +7,27 @@ data "kubernetes_resources" "nomad_namespaces" {
 locals {
   namespaces = jsondecode(jsonencode(data.kubernetes_resources.nomad_namespaces.objects))
   processed_namespaces = [
-    for namespace in local.namespaces : {
+    for item in local.namespaces : {
       capabilities = (
-        namespace.spec.capabilities.disabled_task_drivers == null &&
-        namespace.spec.capabilities.enabled_task_drivers == null
-      ) ? null : namespace.spec.capabilities
-      description = namespace.spec.description
-      meta        = namespace.spec.meta
-      name        = namespace.spec.name
+        item.spec.capabilities.disabled_task_drivers == null &&
+        item.spec.capabilities.enabled_task_drivers == null
+      ) ? null : item.spec.capabilities
+      description = item.spec.description
+      meta        = item.spec.meta
+      name        = item.spec.name
       node_pool_config = (
-        namespace.spec.node_pool_config.allowed == null &&
-        namespace.spec.node_pool_config.default == null &&
-        namespace.spec.node_pool_config.denied == null
-      ) ? null : namespace.spec.node_pool_config
-      provider = namespace.spec.provider
-      quota    = namespace.spec.quota
+        item.spec.node_pool_config.allowed == null &&
+        item.spec.node_pool_config.default == null &&
+        item.spec.node_pool_config.denied == null
+      ) ? null : item.spec.node_pool_config
+      provider = item.spec.provider
+      quota    = item.spec.quota
     }
   ]
 }
 
 resource "nomad_namespace" "this" {
-  for_each = { for namespace in local.processed_namespaces : namespace.name => namespace if namespace.provider == var.provider_name }
+  for_each = { for item in local.processed_namespaces : item.name => item if item.provider == var.provider_name }
 
   name        = each.key
   description = each.value.description

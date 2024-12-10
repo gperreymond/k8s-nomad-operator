@@ -1,3 +1,7 @@
 output "namespaces" {
-  value = { for namespace in local.processed_namespaces : namespace.name => namespace }
+  value = [for item in local.processed_namespaces : item.name]
+}
+
+output "variables" {
+  value = [for item in local.processed_variables : "${item.namespace}:${item.path}"]
 }
