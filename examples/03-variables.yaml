@@ -5,7 +5,7 @@ metadata:
   name: ronflex-secrets
   namespace: kube-public
 spec:
-  provider: europe-paris
+  provider: europe
   namespace: ronflex
   path: '/ronflex'
   items:

@@ -2,11 +2,22 @@
 apiVersion: nomad.hashicorp.com/v1
 kind: NomadNamespace
 metadata:
+  name: monitoring
+  namespace: kube-public
+spec:
+  name: monitoring
+  provider: europe
+  description: "Namespace dedicated to monitoring"
+
+---
+apiVersion: nomad.hashicorp.com/v1
+kind: NomadNamespace
+metadata:
   name: pikachu
   namespace: kube-public
 spec:
   name: pikachu
-  provider: europe-paris
+  provider: europe
   description: "Pikachu est un petit Pokémon joufflu qui ressemble à un rongeur."
   meta:
     Type: 'Electric'
@@ -22,5 +33,5 @@ metadata:
   namespace: kube-public
 spec:
   name: ronflex
-  provider: europe-paris
+  provider: europe
   description: "Ronflex est un Pokémon très pacifique, mais très paresseux aussi."

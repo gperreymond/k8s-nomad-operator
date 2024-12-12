@@ -1,8 +1,7 @@
-datacenter = "europe-paris"
 data_dir = "/opt/nomad"
 log_level  = "INFO"
 log_json  = true
-leave_on_interrupt = false
+leave_on_interrupt = true
 leave_on_terminate = true
 autopilot {
   cleanup_dead_servers = true
@@ -10,6 +9,11 @@ autopilot {
 server {
   enabled = true
   bootstrap_expect = 1
+  server_join {
+    retry_join     = [ "nomad-europe-paris", "nomad-europe-dublin" ]
+    retry_max      = 3
+    retry_interval = "15s"
+  }
 }
 client {
   enabled = false

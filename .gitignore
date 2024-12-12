@@ -1,6 +1,7 @@
 .devbox
 devbox.lock
 
+.tmp
 node_modules
 
 .terraform

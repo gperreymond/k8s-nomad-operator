@@ -63,6 +63,7 @@ spec:
                     type: boolean
               required:
                 - address
+                - region
   scope: Namespaced
   names:
     plural: nomadproviders

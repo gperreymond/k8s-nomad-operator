@@ -1,21 +1,75 @@
 services:
 
-  nomad-server:
+  traefik:
+    image: 'traefik:v3.2.2'
+    container_name: 'traefik'
+    command:
+      - '--api.insecure=true'
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.nomad=true'
+      - '--providers.nomad.endpoint.address=http://nomad-europe-paris:4646'
+      - '--providers.nomad.exposedByDefault=false'
+      - '--entryPoints.web.address=:80'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.traefik-dashboard.rule=Host(`traefik.docker.localhost`)'
+      - 'traefik.http.routers.traefik-dashboard.entrypoints=web'
+      - 'traefik.http.routers.traefik-dashboard.service=api@internal'
+    ports:
+      - '80:80/tcp'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    networks:
+      minikube: {}
+
+  nomad-europe-paris:
     image: 'hashicorp/nomad:1.9.3'
-    container_name: 'nomad-server'
-    command: 'agent -config=/etc/nomad/server.hcl'
+    container_name: 'nomad-europe-paris'
+    command: 'agent -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
     privileged: true
     environment:
       - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.nomad-europe.rule=Host(`nomad-europe.docker.localhost`)'
+      - 'traefik.http.routers.nomad-europe.entrypoints=web'
+      - 'traefik.http.services.nomad-europe.loadbalancer.server.port=4646'
     volumes:
-      - './configs/nomad-server.hcl:/etc/nomad/server.hcl:ro'
-      - 'nomad_data:/opt/nomad'
-    ports:
-      - '4646:4646/tcp'
-      - '4647:4647/tcp'
-      - '4648:4648/tcp'
-      - '4648:4648/udp'
+      - './configs/nomad/server/default.hcl:/etc/nomad/config.hcl:ro'
+      - './configs/nomad/server/paris.hcl:/etc/nomad/paris.hcl:ro'
+      - 'nomad_europe_paris_data:/opt/nomad'
+    networks:
+      minikube:
+        ipv4_address: '192.168.49.21'
+
+  nomad-europe-dublin:
+    image: 'hashicorp/nomad:1.9.3'
+    container_name: 'nomad-europe-dublin'
+    command: 'agent -config=/etc/nomad/config.hcl -config=/etc/nomad/dublin.hcl'
+    privileged: true
+    environment:
+      - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.nomad-europe.rule=Host(`nomad-europe.docker.localhost`)'
+      - 'traefik.http.routers.nomad-europe.entrypoints=web'
+      - 'traefik.http.services.nomad-europe.loadbalancer.server.port=4646'
+    volumes:
+      - './configs/nomad/server/default.hcl:/etc/nomad/config.hcl:ro'
+      - './configs/nomad/server/dublin.hcl:/etc/nomad/dublin.hcl:ro'
+      - 'nomad_europe_dublin_data:/opt/nomad'
+    networks:
+      minikube:
+        ipv4_address: '192.168.49.31'
+
+networks:
+
+  minikube:
+    name: minikube
+    external: true
 
 volumes:
 
-  nomad_data: {}
+  nomad_europe_paris_data: {}
+  nomad_europe_dublin_data: {}

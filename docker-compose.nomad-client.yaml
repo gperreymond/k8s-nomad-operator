@@ -1,0 +1,29 @@
+services:
+
+  nomad-client-01:
+    image: 'hashicorp/nomad:1.9.3'
+    container_name: 'nomad-client-01'
+    command: 'agent -node=nomad-client-01 -config=/etc/nomad/config.hcl'
+    privileged: true
+    environment:
+      - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+    volumes:
+      - './configs/nomad/client/default.hcl:/etc/nomad/config.hcl:ro'
+      - 'nomad_client_01_data:/opt/nomad'
+      - '/tmp:/tmp'
+      - '/sys:/sys'
+      - '.tmp/cni/bin:/opt/cni/bin:ro'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    networks:
+      minikube:
+        ipv4_address: '192.168.49.41'
+
+networks:
+
+  minikube:
+    name: minikube
+    external: true
+
+volumes:
+
+  nomad_client_01_data: {}

@@ -5,5 +5,5 @@ variable "kube_namespace" {
 
 variable "provider_name" {
   type    = string
-  default = "europe-paris"
+  default = "europe"
 }
