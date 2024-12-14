@@ -1,0 +1,26 @@
+---
+apiVersion: tf.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: keycloak
+spec:
+  configuration: |
+    terraform {
+      backend "kubernetes" {
+        secret_suffix     = "keycloak"
+        namespace         = "crossplane-system"
+        in_cluster_config = true
+      }
+      required_providers {
+        keycloak = {
+          source = "mrparkers/keycloak"
+          version = "4.4.0"
+        }
+      }
+    }
+    provider "keycloak" {
+      client_id = "admin-cli"
+      username = "admin"
+      password = "changeme"
+      url = "http://192.168.49.50:8080"
+    }

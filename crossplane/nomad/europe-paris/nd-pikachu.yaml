@@ -1,0 +1,53 @@
+---
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: nd-pikachu
+spec:
+  providerConfigRef:
+    name: nomad
+  writeConnectionSecretToRef:
+    name: tf-outputs-nd-pikachu
+    namespace: crossplane-system
+  forProvider:
+    source: Inline
+    env:
+      - name: TF_VAR_keycloak_client_id
+        secretKeyRef:
+          namespace: crossplane-system
+          name: tf-outputs-kc-client-pikachu
+          key: keycloak_client_id
+      - name: TF_VAR_keycloak_client_secret
+        secretKeyRef:
+          namespace: crossplane-system
+          name: tf-outputs-kc-client-pikachu
+          key: keycloak_client_secret
+    vars:
+      - key: namespace
+        value: pikachu
+    module: |
+      variable "namespace" {
+        type = string
+      }
+      variable "keycloak_client_id" {
+        type = string
+      }
+      variable "keycloak_client_secret" {
+        type = string
+      }
+      resource "nomad_namespace" "this" {
+        name = var.namespace
+        provider = nomad.europe
+      }
+      resource "nomad_variable" "keycloak" {
+        namespace = nomad_namespace.this.name
+        path = "${nomad_namespace.this.name}/keycloak"
+        items = {
+          KEYCLOAK_CLIENT_ID = "${var.keycloak_client_id}"
+          KEYCLOAK_CLIENT_SECRET = "${var.keycloak_client_secret}"
+        }
+        depends_on = [
+          nomad_namespace.this,
+        ]
+        provider = nomad.europe
+      }

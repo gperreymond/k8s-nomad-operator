@@ -1,5 +1,3 @@
-region = "europe"
-datacenter = "paris"
 data_dir = "/opt/nomad"
 log_level  = "INFO"
 log_json  = true
@@ -8,7 +6,7 @@ leave_on_terminate = true
 client {
   enabled = true
   server_join {
-    retry_join     = [ "nomad-europe-paris", "nomad-europe-dublin" ]
+    retry_join     = [ "nomad-europe-paris-1", "nomad-europe-paris-2" ]
     retry_max      = 3
     retry_interval = "15s"
   }

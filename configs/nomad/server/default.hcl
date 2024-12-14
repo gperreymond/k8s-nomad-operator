@@ -3,14 +3,19 @@ log_level  = "INFO"
 log_json  = true
 leave_on_interrupt = true
 leave_on_terminate = true
+disable_update_check = true
 autopilot {
   cleanup_dead_servers = true
 }
 server {
   enabled = true
-  bootstrap_expect = 1
+  bootstrap_expect = 3
   server_join {
-    retry_join     = [ "nomad-europe-paris", "nomad-europe-dublin" ]
+    retry_join     = [
+      "nomad-europe-paris-1",
+      "nomad-europe-paris-2",
+      "nomad-europe-paris-3"
+    ]
     retry_max      = 3
     retry_interval = "15s"
   }
