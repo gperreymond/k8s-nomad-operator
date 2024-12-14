@@ -1,9 +1,0 @@
----
-apiVersion: nomad.hashicorp.com/v1
-kind: NomadProvider
-metadata:
-  name: europe
-  namespace: kube-public
-spec:
-  address: "http://192.168.49.21:4646"
-  region: europe
