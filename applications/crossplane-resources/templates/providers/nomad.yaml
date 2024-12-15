@@ -21,7 +21,7 @@ spec:
     }
     provider "nomad" {
       {{- range $key, $val := $provider }}
-      {{ $key }}: {{ $val }}
+      {{ $key }} = "{{ $val }}"
       {{- end }}
     }
 {{- end }}
