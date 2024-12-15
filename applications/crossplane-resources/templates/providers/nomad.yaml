@@ -1,5 +1,5 @@
 ---
-{{- range $provider := .Values.nomad.providers }}
+{{- range $i, $provider := .Values.nomad.providers }}
 apiVersion: tf.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
