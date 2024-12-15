@@ -1,13 +1,14 @@
 ---
+{{- range $provider := .Values.nomad.providers }}
 apiVersion: tf.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: nomad
+  name: nomad-{{ $provider.region }}
 spec:
   configuration: |
     terraform {
       backend "kubernetes" {
-        secret_suffix     = "nomad"
+        secret_suffix     = "nomad-{{ $provider.region }}"
         namespace         = "crossplane-system"
         in_cluster_config = true
       }
@@ -19,7 +20,8 @@ spec:
       }
     }
     provider "nomad" {
-      address = "http://192.168.49.21:4646"
-      region = "europe"
-      alias = "europe"
+      {{- range $key, $val := $provider }}
+      {{ $key }}: {{ $val }}
+      {{- end }}
     }
+{{- end }}

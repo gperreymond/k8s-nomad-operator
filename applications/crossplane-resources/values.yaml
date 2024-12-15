@@ -1,4 +1,11 @@
-clients:
-  - name: pikachu
-  - name: ronflex
-  - name: drakofeu
+nomad:
+  providers:
+    - region: europe
+      address: http://192.168.49.21:4646
+    - region: latam
+      address: http://192.168.49.31:4646
+
+# clients:
+#   - name: pikachu
+#   - name: ronflex
+#   - name: drakofeu
