@@ -1,0 +1,5 @@
+nomad:
+  namespaces:
+    - name: pikachu
+    - name: ronflex
+    - name: drakofeu
