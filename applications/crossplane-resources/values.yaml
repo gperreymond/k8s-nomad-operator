@@ -1,5 +1,4 @@
-nomad:
-  namespaces:
-    - name: pikachu
-    - name: ronflex
-    - name: drakofeu
+clients:
+  - name: pikachu
+  - name: ronflex
+  - name: drakofeu
