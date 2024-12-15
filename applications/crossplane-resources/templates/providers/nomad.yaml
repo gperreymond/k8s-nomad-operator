@@ -1,9 +1,9 @@
 {{- range $provider := .Values.nomad.providers }}
 ---
-apiVersion: tf.upbound.io/v1beta1
-kind: ProviderConfig
+apiVersion: 'tf.upbound.io/v1beta1'
+kind: 'ProviderConfig'
 metadata:
-  name: nomad-{{ $provider.region }}
+  name: 'nomad-{{ $provider.region }}'
 spec:
   configuration: |
     terraform {
@@ -20,8 +20,7 @@ spec:
       }
     }
     provider "nomad" {
-      {{- range $key, $val := $provider }}
-      {{ $key }} = "{{ $val }}"
-      {{- end }}
+      address = "{{ $provider.address }}"
+      region = "{{ $provider.region }}"
     }
 {{- end }}

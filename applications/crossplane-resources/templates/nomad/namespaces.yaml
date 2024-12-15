@@ -1,3 +1,29 @@
+{{- range $namespace := .Values.nomad.namespaces }}
+---
+apiVersion: 'tf.upbound.io/v1beta1'
+kind: 'Workspace'
+metadata:
+  name: 'namespace-{{ $namespace.name }}'
+spec:
+  providerConfigRef:
+    name: '{{ $namespace.providerName }}'
+  writeConnectionSecretToRef:
+    name: outputs-nomad-namespace-{{ $namespace.name }}
+    namespace: crossplane-system
+  forProvider:
+    source: 'Inline'
+    vars:
+      - key: 'namespace'
+        value: '{{ $namespace.name }}'
+    module: |
+      variable "namespace" {
+        type = string
+      }
+      resource "nomad_namespace" "this" {
+        name = var.namespace
+      }
+{{- end }}
+
 # ---
 # apiVersion: tf.upbound.io/v1beta1
 # kind: Workspace

@@ -1,8 +1,8 @@
 ---
-apiVersion: tf.upbound.io/v1beta1
-kind: ProviderConfig
+apiVersion: 'tf.upbound.io/v1beta1'
+kind: 'ProviderConfig'
 metadata:
-  name: keycloak
+  name: 'keycloak'
 spec:
   configuration: |
     terraform {
