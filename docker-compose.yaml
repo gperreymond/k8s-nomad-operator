@@ -5,7 +5,10 @@ services:
     container_name: 'traefik'
     env_file: '.env'
     command:
+      - '--log.level=INFO'
       - '--api.insecure=true'
+      - '--providers.file.watch=true'
+      - '--providers.file.directory=/traefik/configs/dynamic'
       - '--providers.docker=true'
       - '--providers.docker.exposedbydefault=false'
       - '--providers.nomad=true'
@@ -21,6 +24,7 @@ services:
       - '80:80/tcp'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - './configs/traefik/dynamic:/traefik/configs/dynamic:ro'
     networks:
       minikube:
         ipv4_address: '${IP_TRAEFIK}'
