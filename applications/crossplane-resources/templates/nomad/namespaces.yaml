@@ -3,13 +3,13 @@
 apiVersion: 'tf.upbound.io/v1beta1'
 kind: 'Workspace'
 metadata:
-  name: 'namespace-{{ $namespace.name }}'
+  name: 'nomad-namespace-{{ $namespace.name }}'
 spec:
   providerConfigRef:
     name: '{{ $namespace.providerName }}'
   writeConnectionSecretToRef:
     name: outputs-nomad-namespace-{{ $namespace.name }}
-    namespace: crossplane-system
+    namespace: terraform-system
   forProvider:
     source: 'Inline'
     vars:
@@ -21,6 +21,10 @@ spec:
       }
       resource "nomad_namespace" "this" {
         name = var.namespace
+      }
+      output "namespace" {
+        value = nomad_namespace.this.name
+        sensitive = false
       }
 {{- end }}
 

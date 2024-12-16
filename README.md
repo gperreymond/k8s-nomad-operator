@@ -17,6 +17,7 @@ $ kubectx minikube
 $ docker compose up -d --force-recreate
 $ docker compose -f docker-compose.nomad.yaml up -d --force-recreate
 # install crossplane
+$ kubectl create namespace terraform-system
 $ kubectl create namespace crossplane-system
 $ helm repo add crossplane https://charts.crossplane.io/master/
 $ helm upgrade --install my-crossplane crossplane/crossplane --version 1.19.0-rc.0.130.g528a75077 --namespace crossplane-system --values configs/crossplane/values.yaml
