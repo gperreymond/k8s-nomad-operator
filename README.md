@@ -35,13 +35,6 @@ $ kubectl create namespace argo-system
 $ helm upgrade --install argo-cd oci://ghcr.io/argoproj/argo-helm/argo-cd --version 7.7.10 --namespace argo-system --values configs/argo-cd/values.yaml
 # install manifests
 $ kubectl apply -f manifests/argo-system
-# install crossplane providers
-$ kubectl apply -f crossplane/providers
-# deploy terraform workspaces
-$ kubectl apply -f crossplane/keycloak
-$ kubectl apply -f crossplane/keycloak/europe-paris
-$ kubectl apply -f crossplane/nomad
-$ kubectl apply -f crossplane/nomad/europe-paris
 ```
 
 ```sh
