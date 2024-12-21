@@ -11,4 +11,4 @@ spec:
     namespace: terraform-system
   forProvider:
     source: Remote
-    module: https://github.com/gperreymond/k8s-nomad-operator/blob/main/terraform/modules/kestra/first-flow.tf
+    module: https://github.com/gperreymond/k8s-nomad-operator/blob/main/terraform/modules/kestra
