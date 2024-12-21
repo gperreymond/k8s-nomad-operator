@@ -1,7 +1,9 @@
 resource "kestra_flow" "hello" {
-  namespace = "testing.team"
   flow_id   = "hello"
+  namespace = "testing.team"
   content   = <<EOT
+id: hello
+namespace: testing.team
 tasks:
   - id: hello
     type: io.kestra.plugin.core.log.Log
