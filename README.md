@@ -20,7 +20,16 @@ $ docker compose -f docker-compose.nomad.yaml up -d --force-recreate
 $ kubectl create namespace terraform-system
 $ kubectl create namespace crossplane-system
 $ helm repo add crossplane https://charts.crossplane.io/master/
-$ helm upgrade --install my-crossplane crossplane/crossplane --version 1.19.0-rc.0.130.g528a75077 --namespace crossplane-system --values configs/crossplane/values.yaml
+$ helm upgrade --install crossplane crossplane/crossplane --version 1.19.0-rc.0.130.g528a75077 --namespace crossplane-system --values configs/crossplane/values.yaml
+# install kestra
+$ helm repo add kestra https://helm.kestra.io/
+$ kubectl create namespace kestra-system
+$ kubectl create secret generic kestra-config --namespace=kestra-system --from-literal=application-kestra.yml=
+$ kubectl create secret generic kestra-postgresql-auth \
+    --namespace=kestra-system \
+    --from-literal=ADMIN_PASSWORD=superchangeme \
+    --from-literal=USER_PASSWORD=changeme
+$ helm upgrade --install kestra kestra/kestra --version 0.20.7 --namespace kestra-system --values configs/kestra/values.yaml
 # install argo-cd
 $ kubectl create namespace argo-system
 $ helm upgrade --install argo-cd oci://ghcr.io/argoproj/argo-helm/argo-cd --version 7.7.10 --namespace argo-system --values configs/argo-cd/values.yaml
@@ -38,14 +47,12 @@ $ kubectl apply -f crossplane/nomad/europe-paris
 ```sh
 # argo-cd admin password
 $ kubectl -n argo-system get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-# argocd cli > login
-$ argocd login argo-cd.docker.localhost:80 --grpc-web --insecure --plaintext --username admin --password [password]
-$ argocd context
 ```
 
 * https://marketplace.upbound.io/
 * http://traefik.docker.localhost/
 * http://keycloak.docker.localhost/
+* http://kestra.docker.localhost/
 * http://nomad.europe-paris.docker.localhost/
 
 ## Install cni plugins for nomad clients

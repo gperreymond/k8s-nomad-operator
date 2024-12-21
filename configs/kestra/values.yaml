@@ -1,0 +1,60 @@
+deployments:
+  standalone:
+    enabled: true
+  webserver:
+    enabled: false
+    autoscaler:
+      enabled: false
+  executor:
+    enabled: false
+  indexer:
+    enabled: false
+  scheduler:
+    enabled: false
+  worker:
+    enabled: false
+
+configuration:
+  kestra:
+    tutorialFlows:
+      enabled: false
+
+extraEnv:
+  - name: DATASOURCES_POSTGRES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: kestra-postgresql-auth
+        key: USER_PASSWORD
+
+dind:
+  enabled: false
+
+kafka:
+  enabled: false
+
+elasticsearch:
+  enabled: false
+
+minio:
+  enabled: true
+
+postgresql:
+  enabled: true
+  architecture: 'standalone'
+  auth:
+    enablePostgresUser: true
+    database: 'kestra'
+    username: 'kestra'
+    existingSecret: kestra-postgresql-auth
+    secretKeys:
+      adminPasswordKey: 'ADMIN_PASSWORD'
+      userPasswordKey: 'USER_PASSWORD'
+    
+ingress:
+  enabled: true
+  className: 'nginx'
+  hosts:
+    - host: kestra.docker.localhost
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
