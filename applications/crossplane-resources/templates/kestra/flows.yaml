@@ -11,4 +11,4 @@ spec:
     namespace: terraform-system
   forProvider:
     source: Remote
-    module: git::https://github.com/gperreymond/k8s-nomad-operator/terraform/modules/kestra?ref=main
+    module: git::https://github.com/gperreymond/k8s-nomad-operator.git//terraform/modules/kestra?ref=main
