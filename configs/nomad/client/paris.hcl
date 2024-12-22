@@ -1,2 +1,2 @@
-region = "europe"
+region     = "europe"
 datacenter = "paris"

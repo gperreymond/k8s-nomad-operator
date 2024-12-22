@@ -12,7 +12,7 @@ deployments:
   scheduler:
     enabled: true
   worker:
-    enabled: true
+    enabled: false
 
 configuration:
   datasources:
