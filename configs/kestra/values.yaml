@@ -1,25 +1,35 @@
 deployments:
   standalone:
-    enabled: true
-  webserver:
     enabled: false
+  webserver:
+    enabled: true
     autoscaler:
       enabled: false
   executor:
-    enabled: false
+    enabled: true
   indexer:
-    enabled: false
+    enabled: true
   scheduler:
-    enabled: false
+    enabled: true
   worker:
-    enabled: false
+    enabled: true
 
 configuration:
+  datasources:
+    postgres:
+      url: 'jdbc:postgresql://192.168.49.60:5432/kestra'
+      driverClassName: org.postgresql.Driver
   kestra:
     tutorialFlows:
       enabled: false
+    queue:
+      type: postgres
+    repository:
+      type: postgres
 
 extraEnv:
+  - name: DATASOURCES_POSTGRES_USERNAME
+    value: 'kestra'
   - name: DATASOURCES_POSTGRES_PASSWORD
     valueFrom:
       secretKeyRef:
@@ -39,16 +49,7 @@ minio:
   enabled: true
 
 postgresql:
-  enabled: true
-  architecture: 'standalone'
-  auth:
-    enablePostgresUser: true
-    database: 'kestra'
-    username: 'kestra'
-    existingSecret: kestra-postgresql-auth
-    secretKeys:
-      adminPasswordKey: 'ADMIN_PASSWORD'
-      userPasswordKey: 'USER_PASSWORD'
+  enabled: false
     
 ingress:
   enabled: true

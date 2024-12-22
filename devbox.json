@@ -4,7 +4,6 @@
     "minikube@1.34.0",
     "kubectx@0.9.5",
     "kubectl@1.31.2",
-    "argocd@2.13.1",
     "terraform@1.5.5"
   ],
   "shell": {
@@ -12,9 +11,19 @@
       "echo 'Welcome to devbox!' > /dev/null"
     ],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
-      ]
+      "minikube:start": [
+        "minikube start --driver=docker --kubernetes-version=v1.31.3 --network=minikube-network",
+        "minikube addons enable ingress",
+        "minikube update-context",
+        "kubectx minikube"
+      ],
+      "docker-compose:start": [
+        "docker compose up -d --force-recreate",
+        "docker compose -f docker-compose.nomad.yaml up -d --force-recreate"
+      ],
+      "argo-cd": [ "./scripts/argo-cd.sh" ],
+      "crossplane": [ "./scripts/crossplane.sh" ],
+      "kestra": [ "./scripts/kestra.sh" ]
     }
   }
 }

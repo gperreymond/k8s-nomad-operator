@@ -4,7 +4,7 @@ http:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: "http://192.168.49.2"
+          - url: "http://minikube"
   routers:
     kestra:
       rule: "Host(`kestra.docker.localhost`)"

@@ -7,7 +7,7 @@ services:
     command: 'agent -node=nomad-europe-paris-1 -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
     privileged: true
     environment:
-      - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+      NOMAD_SKIP_DOCKER_IMAGE_WARN: 'true'
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.nomad-europe-paris.rule=Host(`nomad.europe-paris.docker.localhost`)'
@@ -28,7 +28,7 @@ services:
     command: 'agent -node=nomad-europe-paris-2 -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
     privileged: true
     environment:
-      - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+      NOMAD_SKIP_DOCKER_IMAGE_WARN: 'true'
     volumes:
       - './configs/nomad/server/default.hcl:/etc/nomad/config.hcl:ro'
       - './configs/nomad/server/paris.hcl:/etc/nomad/paris.hcl:ro'
@@ -44,7 +44,7 @@ services:
     command: 'agent -node=nomad-europe-paris-3 -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
     privileged: true
     environment:
-      - NOMAD_SKIP_DOCKER_IMAGE_WARN=true
+      NOMAD_SKIP_DOCKER_IMAGE_WARN: 'true'
     volumes:
       - './configs/nomad/server/default.hcl:/etc/nomad/config.hcl:ro'
       - './configs/nomad/server/paris.hcl:/etc/nomad/paris.hcl:ro'
@@ -56,7 +56,7 @@ services:
 networks:
 
   minikube:
-    name: minikube
+    name: 'minikube-network'
     external: true
 
 volumes:

@@ -2,3 +2,6 @@
 devbox.lock
 
 .bin
+
+/opt
+configs/nomad/client/dynamic.hcl

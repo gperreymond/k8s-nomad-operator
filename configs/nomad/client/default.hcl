@@ -1,4 +1,3 @@
-data_dir = "/opt/nomad"
 log_level  = "INFO"
 log_json  = true
 leave_on_interrupt = true
