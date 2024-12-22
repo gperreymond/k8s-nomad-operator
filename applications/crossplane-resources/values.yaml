@@ -1,15 +1,13 @@
 nomad:
-  # providers: []
-  # namespaces: []
   providers:
     - region: 'europe'
       address: 'http://192.168.49.21:4646'
-  #   - region: 'asia'
-  #     address: 'http://192.168.49.31:4646'
   namespaces:
-    - name: 'pikachu'
+    - name: 'nomad-system'
       providerName: 'nomad-europe'
-    - name: 'ronflex'
+    - name: 'nomad-public'
       providerName: 'nomad-europe'
-  #   - name: 'drakofeu'
-  #     providerName: 'nomad-asia'
+    - name: 'kestra-system'
+      providerName: 'nomad-europe'
+    - name: 'monitoring-system'
+      providerName: 'nomad-europe'
