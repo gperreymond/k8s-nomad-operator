@@ -1,7 +1,7 @@
 services:
 
   nomad-europe-paris-1:
-    image: 'hashicorp/nomad:1.9.3'
+    image: 'hashicorp/nomad:${NOMAD_VERSION}'
     container_name: 'nomad-europe-paris-1'
     env_file: '.env'
     command: 'agent -node=nomad-europe-paris-1 -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
@@ -22,7 +22,7 @@ services:
         ipv4_address: '${IP_NOMAD_SERVER_1}'
 
   nomad-europe-paris-2:
-    image: 'hashicorp/nomad:1.9.3'
+    image: 'hashicorp/nomad:${NOMAD_VERSION}'
     container_name: 'nomad-europe-paris-2'
     env_file: '.env'
     command: 'agent -node=nomad-europe-paris-2 -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
@@ -38,7 +38,7 @@ services:
         ipv4_address: '${IP_NOMAD_SERVER_2}'
 
   nomad-europe-paris-3:
-    image: 'hashicorp/nomad:1.9.3'
+    image: 'hashicorp/nomad:${NOMAD_VERSION}'
     env_file: '.env'
     container_name: 'nomad-europe-paris-3'
     command: 'agent -node=nomad-europe-paris-3 -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'

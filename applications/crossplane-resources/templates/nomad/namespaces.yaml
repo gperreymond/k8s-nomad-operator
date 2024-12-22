@@ -11,21 +11,11 @@ spec:
     name: outputs-nomad-namespace-{{ $namespace.name }}
     namespace: terraform-system
   forProvider:
-    source: 'Inline'
+    source: Remote
+    module: git::https://github.com/gperreymond/k8s-nomad-operator.git//terraform/modules/nomad/namespace?ref=main
     vars:
       - key: 'namespace'
         value: '{{ $namespace.name }}'
-    module: |
-      variable "namespace" {
-        type = string
-      }
-      resource "nomad_namespace" "this" {
-        name = var.namespace
-      }
-      output "namespace" {
-        value = nomad_namespace.this.name
-        sensitive = false
-      }
 {{- end }}
 
 # ---

@@ -48,7 +48,17 @@ $ kubectl -n argo-system get secret argocd-initial-admin-secret -o jsonpath="{.d
 * http://kestra.docker.localhost/
 * http://nomad.europe-paris.docker.localhost/
 
+## Install Nomad
+
+I choose to download the binary into ".bin" directory in this repo.
+
+```sh
+$ .bin/nomad agent -node=nomad-local-client -config=./configs/nomad/client/default.hcl -config=./configs/nomad/client/paris.hcl
+```
+
 ## Install cni plugins for nomad clients
+
+* https://github.com/containernetworking/plugins
 
 ```sh
 $ export ARCH_CNI=$( [ $(uname -m) = aarch64 ] && echo arm64 || echo amd64)
