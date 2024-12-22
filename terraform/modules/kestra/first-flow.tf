@@ -5,7 +5,7 @@ resource "kestra_flow" "hello" {
 id: hello
 namespace: testing.team
 tasks:
-  - id: hello
+  - id: log-hello-world
     type: io.kestra.plugin.core.log.Log
     message: Hello World! 🚀
 EOT
