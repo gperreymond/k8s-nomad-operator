@@ -9,7 +9,7 @@ nomad:
   namespaces:
     - name: 'pikachu'
       providerName: 'nomad-europe'
-  #   - name: 'ronflex'
-  #     providerName: 'nomad-europe'
+    - name: 'ronflex'
+      providerName: 'nomad-europe'
   #   - name: 'drakofeu'
   #     providerName: 'nomad-asia'
