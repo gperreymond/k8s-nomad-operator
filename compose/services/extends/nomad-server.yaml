@@ -1,0 +1,16 @@
+services:
+
+  nomad-server:
+    image: 'hashicorp/nomad:${NOMAD_VERSION}'
+    command: 'agent -config=/etc/nomad/config.hcl -config=/etc/nomad/paris.hcl'
+    privileged: true
+    environment:
+      NOMAD_SKIP_DOCKER_IMAGE_WARN: 'true'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.nomad-europe-paris.rule=Host(`nomad.europe-paris.docker.localhost`)'
+      - 'traefik.http.routers.nomad-europe-paris.entrypoints=web'
+      - 'traefik.http.services.nomad-europe-paris.loadbalancer.server.port=4646'
+    volumes:
+      - '../../configurations/nomad/server/default.hcl:/etc/nomad/config.hcl:ro'
+      - '../../configurations/nomad/server/paris.hcl:/etc/nomad/paris.hcl:ro'

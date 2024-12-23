@@ -18,9 +18,14 @@
         "minikube update-context",
         "kubectx minikube"
       ],
+      "docker-compose:config": [
+        "docker compose --env-file compose/global.vars config"
+      ],
       "docker-compose:start": [
-        "docker compose up -d --force-recreate",
-        "docker compose -f docker-compose.nomad.yaml up -d --force-recreate"
+        "docker compose --env-file compose/global.vars up --detach"
+      ],
+      "docker-compose:start-force": [
+        "docker compose --env-file compose/global.vars up --detach --force-recreate"
       ],
       "argo-cd":    ["./scripts/argo-cd.sh"],
       "crossplane": ["./scripts/crossplane.sh"],

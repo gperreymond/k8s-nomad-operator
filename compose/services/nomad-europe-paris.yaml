@@ -1,0 +1,45 @@
+services:
+
+  nomad-europe-paris-1: &nomad-europe-paris
+    extends:
+      file: extends/nomad-server.yaml
+      service: nomad-server
+    container_name: 'nomad-europe-paris-1'
+    hostname: 'nomad-europe-paris-1'
+    environment:
+      NOMAD_NODE_NAME: 'nomad-europe-paris-1'
+    volumes:
+      - 'nomad_europe_paris_1_data:/opt/nomad'
+    networks:
+      minikube:
+        ipv4_address: '${IP_NOMAD_SERVER_1}'
+
+  nomad-europe-paris-2:
+    <<: *nomad-europe-paris
+    container_name: 'nomad-europe-paris-2'
+    hostname: 'nomad-europe-paris-2'
+    environment:
+      NOMAD_NODE_NAME: 'nomad-europe-paris-2'
+    volumes:
+       - 'nomad_europe_paris_2_data:/opt/nomad'
+    networks:
+      minikube:
+        ipv4_address: '${IP_NOMAD_SERVER_2}'
+
+  nomad-europe-paris-3:
+    <<: *nomad-europe-paris
+    container_name: 'nomad-europe-paris-3'
+    hostname: 'nomad-europe-paris-3'
+    environment:
+      NOMAD_NODE_NAME: 'nomad-europe-paris-3'
+    volumes:
+       - 'nomad_europe_paris_3_data:/opt/nomad'
+    networks:
+      minikube:
+        ipv4_address: '${IP_NOMAD_SERVER_3}'
+
+volumes:
+
+  nomad_europe_paris_1_data: {}
+  nomad_europe_paris_2_data: {}
+  nomad_europe_paris_3_data: {}

@@ -1,0 +1,29 @@
+services:
+
+  traefik:
+    image: 'traefik:v3.2.2'
+    container_name: 'traefik'
+    command:
+      - '--log.level=INFO'
+      - '--api.insecure=true'
+      - '--providers.file.watch=true'
+      - '--providers.file.directory=/traefik/configs/dynamic'
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.nomad=true'
+      - '--providers.nomad.endpoint.address=http://nomad-europe-paris-1:4646'
+      - '--providers.nomad.exposedByDefault=false'
+      - '--entryPoints.web.address=:80'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.traefik-dashboard.rule=Host(`traefik.docker.localhost`)'
+      - 'traefik.http.routers.traefik-dashboard.entrypoints=web'
+      - 'traefik.http.routers.traefik-dashboard.service=api@internal'
+    ports:
+      - '80:80/tcp'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '../configurations/traefik/dynamic:/traefik/configs/dynamic:ro'
+    networks:
+      minikube:
+        ipv4_address: '${IP_TRAEFIK}'
