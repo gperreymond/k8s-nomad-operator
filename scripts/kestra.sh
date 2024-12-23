@@ -13,4 +13,4 @@ helm repo update
 helm upgrade --install kestra kestra/kestra \
     --version 0.20.7 \
     --namespace kestra-system \
-    --values configs/kestra/values.yaml
+    --values helm/kestra/values.yaml

@@ -10,4 +10,4 @@ helm repo update
 helm upgrade --install crossplane crossplane/crossplane \
     --version 1.19.0-rc.0.142.ge485783b6 \
     --namespace crossplane-system \
-    --values configs/crossplane/values.yaml
+    --values helm/crossplane/values.yaml

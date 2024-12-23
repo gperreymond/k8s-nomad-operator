@@ -1,0 +1,43 @@
+# ---
+# apiVersion: tf.upbound.io/v1beta1
+# kind: Workspace
+# metadata:
+#   name: kc-realm-europe-paris
+# spec:
+#   providerConfigRef:
+#     name: keycloak
+#   writeConnectionSecretToRef:
+#     name: tf-outputs-kc-realm-europe-paris
+#     namespace: crossplane-system
+#   forProvider:
+#     source: Inline
+#     vars:
+#       - key: keycloak_realm_name
+#         value: "europe-paris"
+#       - key: keycloak_realm_display_name
+#         value: "Europe / Paris"
+#     module: |
+#       variable "keycloak_realm_name" {
+#         type = string
+#       }
+#       variable "keycloak_realm_display_name" {
+#         type = string
+#       }
+#       resource "keycloak_realm" "realm" {
+#         realm = var.keycloak_realm_name
+#         enabled = true
+#         display_name = var.keycloak_realm_display_name
+#         internationalization {
+#           supported_locales = [
+#             "fr",
+#             "en"
+#           ]
+#           default_locale = "fr"
+#         }
+#       }
+#       output "keycloak_realm_name" {
+#         value = var.keycloak_realm_name
+#       }
+#       output "keycloak_realm_id" {
+#         value = keycloak_realm.realm.id
+#       }

@@ -15,7 +15,7 @@ spec:
   sources:
     - repoURL: https://github.com/gperreymond/k8s-nomad-operator.git
       targetRevision: main
-      path: applications/crossplane-resources
+      path: kubernetes/applications/crossplane-resources
       helm:
         releaseName: crossplane-resources
   destination:

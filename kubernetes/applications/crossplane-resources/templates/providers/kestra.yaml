@@ -1,0 +1,23 @@
+---
+apiVersion: 'tf.upbound.io/v1beta1'
+kind: 'ProviderConfig'
+metadata:
+  name: 'kestra'
+spec:
+  configuration: |
+    terraform {
+      backend "kubernetes" {
+        secret_suffix     = "kestra"
+        namespace         = "crossplane-system"
+        in_cluster_config = true
+      }
+      required_providers {
+         kestra = {
+          source = "kestra-io/kestra"
+          version = "0.20.1"
+        }
+      }
+    }
+    provider "kestra" {
+      url = "http://kestra-service.kestra-system:8080"
+    }

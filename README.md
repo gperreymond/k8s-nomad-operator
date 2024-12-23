@@ -20,7 +20,7 @@ $ devbox run crossplane
 # kestra: install or udate
 $ devbox run kestra
 # kubernetes: install manifests
-$ kubectl apply -f manifests/argo-system
+$ kubectl apply -f kubernetes/manifests/argo-system
 ```
 
 ## Utils

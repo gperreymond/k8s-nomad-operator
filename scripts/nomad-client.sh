@@ -8,7 +8,7 @@ if [ -z "$INTERFACE" ]; then
   exit 1
 fi
 
-cat <<EOF > configs/nomad/client/dynamic.hcl
+cat <<EOF > nomad/client/dynamic.hcl
 data_dir = "$DATA_DIR"
 advertise {
   http = "{{ GetInterfaceIP \"$INTERFACE\" }}"
@@ -18,6 +18,6 @@ advertise {
 EOF
 
 sudo .bin/nomad agent -node=nomad-local-client \
-    -config=./configs/nomad/client/default.hcl \
-    -config=./configs/nomad/client/paris.hcl \
-    -config=./configs/nomad/client/dynamic.hcl
+    -config=./nomad/client/default.hcl \
+    -config=./nomad/client/paris.hcl \
+    -config=./nomad/client/dynamic.hcl
