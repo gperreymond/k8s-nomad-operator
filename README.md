@@ -3,9 +3,9 @@
 ## Setup 
 
 ```sh
-# Install devbox, if not installed
+# install devbox, if not installed
 $ curl -fsSL https://get.jetify.com/devbox | bash
-# Install Helm 3, if not installed
+# install Helm 3, if not installed
 $ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # create external docker network
 $ docker network create --driver=bridge --subnet=192.168.49.0/24 minikube-network
@@ -13,11 +13,9 @@ $ docker network create --driver=bridge --subnet=192.168.49.0/24 minikube-networ
 $ devbox run minikube:start
 # docker compose: start
 $ devbox run docker-compose:start
-# argo-cd: install or udate
+# kuberenetes: installs or updates
 $ devbox run argo-cd
-# crossplane: install or udate
 $ devbox run crossplane
-# kestra: install or udate
 $ devbox run kestra
 # kubernetes: install manifests
 $ kubectl apply -f kubernetes/manifests/argo-system

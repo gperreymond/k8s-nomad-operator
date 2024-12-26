@@ -1,14 +1,14 @@
 services:
 
   kestra-postgres:
-    image: postgres:14.15-alpine
+    image: 'postgres:14.15-alpine'
     container_name: 'kestra-postgres'
     environment:
       POSTGRES_DB: 'kestra'
       POSTGRES_USER: 'kestra'
       POSTGRES_PASSWORD: 'changeme'
     volumes:
-      - kestra_postgres_data:/var/lib/postgresql/data
+      - 'kestra_postgres_data:/var/lib/postgresql/data'
     networks:
       minikube:
         ipv4_address: '${IP_KESTRA_POSTGRES}'

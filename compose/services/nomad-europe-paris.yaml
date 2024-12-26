@@ -2,8 +2,8 @@ services:
 
   nomad-europe-paris-1: &nomad-europe-paris
     extends:
-      file: extends/nomad-server.yaml
-      service: nomad-server
+      file: 'extends/nomad-server.yaml'
+      service: 'nomad-server'
     container_name: 'nomad-europe-paris-1'
     hostname: 'nomad-europe-paris-1'
     environment:
