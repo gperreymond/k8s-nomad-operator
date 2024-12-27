@@ -24,7 +24,7 @@
       "docker-compose:start": [
         "docker compose --env-file compose/global.vars up --detach"
       ],
-      "docker-compose:start-force": [
+      "docker-compose:start-recreate": [
         "docker compose --env-file compose/global.vars up --detach --force-recreate"
       ],
       "terraform:linter": [

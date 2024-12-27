@@ -1,5 +1,7 @@
 locals {
-  HELM_ARGO_CD_VERSION = "7.7.11"
+  HELM_ARGO_CD_VERSION           = "7.7.11"
+  HELM_STAKATER_RELOADER_VERSION = "1.2.0"
+  HELM_KESTRA_VERSION            = "0.20.7"
 }
 
 resource "helm_release" "argo_cd" {
@@ -16,7 +18,7 @@ YAML
   ]
 
   depends_on = [
-    null_resource.namespaces,
+    null_resource.kestra,
   ]
 }
 
@@ -37,9 +39,14 @@ resource "kubernetes_manifest" "argocd_applications" {
 
   manifest = yamldecode(templatefile("./files/argo-cd/applications/${each.key}", {
     argo_cd_namespace = kubernetes_namespace.argo_system.id
+    kestra = {
+      destination            = kubernetes_namespace.kestra_system.id
+      chart_target_revision  = local.HELM_KESTRA_VERSION
+      values_target_revision = "main"
+    }
     stakater_reloader = {
       destination            = "kube-public"
-      chart_target_revision  = "1.2.0"
+      chart_target_revision  = local.HELM_STAKATER_RELOADER_VERSION
       values_target_revision = "main"
     }
   }))
@@ -51,6 +58,7 @@ resource "kubernetes_manifest" "argocd_applications" {
 
 resource "null_resource" "argo" {
   depends_on = [
+    null_resource.kestra,
     helm_release.argo_cd,
     kubernetes_manifest.argocd_projects,
     kubernetes_manifest.argocd_applications,

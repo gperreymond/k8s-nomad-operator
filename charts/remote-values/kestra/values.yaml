@@ -14,36 +14,9 @@ deployments:
   worker:
     enabled: false
 
-configuration:
-  datasources:
-    postgres:
-      url: 'jdbc:postgresql://192.168.49.60:5432/kestra'
-      driverClassName: org.postgresql.Driver
-  kestra:
-    tutorialFlows:
-      enabled: false
-    queue:
-      type: 'postgres'
-    repository:
-      type: 'postgres'
-    storage:
-      type: 'minio'
-      minio:
-        endpoint: '192.168.49.49'
-        port: '9000'
-        access-key: 'IOprSEUNkRwU42sxj4Gs'
-        secret-key: 'y3kyfEEKl9rIYGptn2b7Y1nu8Fb8hNrc4gOVQ8DM'
-        secure: 'false'
-        bucket: 'kestra'
-
-extraEnv:
-  - name: DATASOURCES_POSTGRES_USERNAME
-    value: 'kestra'
-  - name: DATASOURCES_POSTGRES_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: kestra-postgresql-auth
-        key: USER_PASSWORD
+externalSecret:
+  secretName: kestra-external-configuration
+  key: application-kestra.yml
 
 dind:
   enabled: false

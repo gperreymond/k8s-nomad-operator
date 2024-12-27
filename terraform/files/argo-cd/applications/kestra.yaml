@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kestra
+  namespace: ${argo_cd_namespace}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: internal
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  sources:
+    - repoURL: https://helm.kestra.io/
+      chart: kestra
+      targetRevision: ${kestra.chart_target_revision}
+      helm:
+        releaseName: kestra
+        valueFiles:
+          - $values/charts/remote-values/stakater-reloader/values.yaml
+    - repoURL: 'https://github.com/gperreymond/k8s-nomad-operator.git'
+      targetRevision: ${kestra.values_target_revision}
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ${kestra.destination}
