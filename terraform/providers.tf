@@ -22,3 +22,8 @@ provider "minio" {
   minio_user     = var.provider_minio_username
   minio_password = var.provider_minio_password
 }
+
+provider "nomad" {
+  address = "http://nomad.europe-paris.docker.localhost"
+  region  = "europe"
+}
