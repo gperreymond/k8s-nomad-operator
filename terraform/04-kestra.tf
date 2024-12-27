@@ -41,7 +41,7 @@ resource "kubernetes_secret" "kestra_configuration" {
 
 resource "nomad_variable" "kestra_configuration" {
   path      = "kestra-external-configuration"
-  namespace = nomad_namespace.kestra_system
+  namespace = nomad_namespace.kestra_system.id
   items = {
     "application-kestra.yml" = local.kestra_configuration
   }
