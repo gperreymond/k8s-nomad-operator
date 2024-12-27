@@ -19,7 +19,7 @@ spec:
       helm:
         releaseName: kestra
         valueFiles:
-          - $values/charts/remote-values/stakater-reloader/values.yaml
+          - $values/charts/remote-values/kestra/values.yaml
     - repoURL: 'https://github.com/gperreymond/k8s-nomad-operator.git'
       targetRevision: ${kestra.values_target_revision}
       ref: values
