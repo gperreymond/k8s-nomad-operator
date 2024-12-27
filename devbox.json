@@ -28,8 +28,8 @@
         "docker compose --env-file compose/global.vars up --detach --force-recreate"
       ],
       "terraform:linter": [
-        "terraform fmt -recursive",
-        "terragrunt hclfmt"
+        "terraform fmt -recursive terraform/",
+        "terragrunt hclfmt --terragrunt-hclfmt-exclude-dir opt"
       ]
     }
   }

@@ -25,8 +25,8 @@ plugin "docker" {
   }
 }
 advertise {
-  http = "{{ GetInterfaceIP \"br-ced7b41690a5\" }}"
-  rpc  = "{{ GetInterfaceIP \"br-ced7b41690a5\" }}"
-  serf = "{{ GetInterfaceIP \"br-ced7b41690a5\" }}"
+  http = "192.168.49.200"
+  rpc  = "192.168.49.200"
+  serf = "192.168.49.200"
 }
 bind_addr = "0.0.0.0"

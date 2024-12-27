@@ -6,4 +6,4 @@ devbox.lock
 .terraform.lock.hcl
 
 /opt
-configs/nomad/client/dynamic.hcl
+nomad/client/dynamic.hcl

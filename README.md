@@ -54,5 +54,5 @@ $ rm cni-plugins.tgz
 I choose to download the binary into ".bin" directory in this repo.
 
 ```sh
-$ ./scripts/nomad-client.sh
+$ sudo ./scripts/nomad-client.sh
 ```
