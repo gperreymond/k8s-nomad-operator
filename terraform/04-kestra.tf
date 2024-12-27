@@ -23,8 +23,8 @@ kestra:
     minio:
       endpoint: '${var.provider_minio_server}'
       port: '${var.provider_minio_server_port}'
-      access-key: '${minio_iam_user.kestra.id}'
-      secret-key: '${minio_iam_user.kestra.secret}'
+      access-key: '${minio_iam_service_account.kestra.access_key}'
+      secret-key: '${minio_iam_service_account.kestra.secret_key}'
       secure: 'false'
       bucket: 'kestra'
 YAML
