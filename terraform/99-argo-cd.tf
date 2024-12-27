@@ -23,9 +23,9 @@ YAML
 }
 
 resource "kubernetes_manifest" "argocd_projects" {
-  for_each = { for filepath in fileset("./files/argo-cd/projects", "*.yaml") : filepath => filepath }
+  for_each = { for filepath in fileset("${path.module}/files/argo-cd/projects", "*.yaml") : filepath => filepath }
 
-  manifest = yamldecode(templatefile("./files/argo-cd/projects/${each.key}", {
+  manifest = yamldecode(templatefile("${path.module}/files/argo-cd/projects/${each.key}", {
     argo_cd_namespace = kubernetes_namespace.argo_system.id
   }))
 
@@ -35,9 +35,9 @@ resource "kubernetes_manifest" "argocd_projects" {
 }
 
 resource "kubernetes_manifest" "argocd_applications" {
-  for_each = { for filepath in fileset("./files/argo-cd/applications", "*.yaml") : filepath => filepath }
+  for_each = { for filepath in fileset("${path.module}/files/argo-cd/applications", "*.yaml") : filepath => filepath }
 
-  manifest = yamldecode(templatefile("./files/argo-cd/applications/${each.key}", {
+  manifest = yamldecode(templatefile("${path.module}/files/argo-cd/applications/${each.key}", {
     argo_cd_namespace = kubernetes_namespace.argo_system.id
     kestra = {
       destination            = kubernetes_namespace.kestra_system.id

@@ -43,7 +43,7 @@ resource "nomad_variable" "kestra_configuration" {
   path      = "kestra-external-configuration"
   namespace = nomad_namespace.kestra_system.id
   items = {
-    "application-kestra.yml" = local.kestra_configuration
+    application_kestra = local.kestra_configuration
   }
 
   depends_on = [
@@ -51,11 +51,25 @@ resource "nomad_variable" "kestra_configuration" {
   ]
 }
 
+resource "nomad_job" "kestra_workers" {
+  jobspec = file("${path.module}/files/nomad/kestra/kestra-workers.hcl")
+  hcl2 {
+    vars = {
+      destination       = nomad_namespace.kestra_system.id,
+      kestra_docker_tag = "0.20.7"
+    }
+  }
+
+  depends_on = [
+    nomad_variable.kestra_configuration,
+  ]
+}
 
 resource "null_resource" "kestra" {
   depends_on = [
     null_resource.minio,
     kubernetes_secret.kestra_configuration,
     nomad_variable.kestra_configuration,
+    nomad_job.kestra_workers,
   ]
 }
