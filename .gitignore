@@ -2,6 +2,8 @@
 devbox.lock
 
 .bin
+.terraform
+.terraform.lock.hcl
 
 /opt
 configs/nomad/client/dynamic.hcl

@@ -12,14 +12,14 @@
       "echo 'Welcome to devbox!' > /dev/null"
     ],
     "scripts": {
+      "docker-compose:config": [
+        "docker compose --env-file compose/global.vars config"
+      ],
       "minikube:start": [
         "minikube start --driver=docker --kubernetes-version=v1.31.3 --network=minikube-network",
         "minikube addons enable ingress",
         "minikube update-context",
         "kubectx minikube"
-      ],
-      "docker-compose:config": [
-        "docker compose --env-file compose/global.vars config"
       ],
       "docker-compose:start": [
         "docker compose --env-file compose/global.vars up --detach"
@@ -27,9 +27,10 @@
       "docker-compose:start-force": [
         "docker compose --env-file compose/global.vars up --detach --force-recreate"
       ],
-      "argo-cd":    ["./scripts/argo-cd.sh"],
-      "crossplane": ["./scripts/crossplane.sh"],
-      "kestra":     ["./scripts/kestra.sh"]
+      "terraform:linter": [
+        "terraform fmt -recursive",
+        "terragrunt hclfmt"
+      ]
     }
   }
 }

@@ -8,17 +8,18 @@ $ curl -fsSL https://get.jetify.com/devbox | bash
 # install Helm 3, if not installed
 $ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 # create external docker network
-$ docker network create --driver=bridge --subnet=192.168.49.0/24 minikube-network
+$ docker network create --driver=bridge --gateway=192.168.49.1 --subnet=192.168.49.0/24 minikube-network
 # minikube: start
 $ devbox run minikube:start
 # docker compose: start
 $ devbox run docker-compose:start
-# kuberenetes: installs or updates
-$ devbox run argo-cd
-$ devbox run crossplane
-$ devbox run kestra
-# kubernetes: install manifests
-$ kubectl apply -f kubernetes/manifests/argo-system
+# terraform: apply
+$ cd terraform
+$ terraform init
+# only the first time
+$ terraform apply -target helm_release.argo_cd
+# after that, all classic
+$ terraform apply
 ```
 
 ## Utils
@@ -31,6 +32,7 @@ $ kubectl -n argo-system get secret argocd-initial-admin-secret -o jsonpath="{.d
 * https://marketplace.upbound.io/
 * http://traefik.docker.localhost/
 * http://keycloak.docker.localhost/
+* http://minio-webui.docker.localhost/
 * http://kestra.docker.localhost/
 * http://nomad.europe-paris.docker.localhost/
 

@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stakater-reloader
+  namespace: ${argo_cd_namespace}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: internal
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  sources:
+    - repoURL: https://stakater.github.io/stakater-charts
+      chart: reloader
+      targetRevision: ${stakater_reloader.chart_target_revision}
+      helm:
+        releaseName: stakater-reloader
+        valueFiles:
+          - $values/charts/remote-values/stakater-reloader/values.yaml
+    - repoURL: 'https://github.com/gperreymond/k8s-nomad-operator.git'
+      targetRevision: ${stakater_reloader.values_target_revision}
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ${stakater_reloader.destination}

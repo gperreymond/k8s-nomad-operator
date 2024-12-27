@@ -23,9 +23,18 @@ configuration:
     tutorialFlows:
       enabled: false
     queue:
-      type: postgres
+      type: 'postgres'
     repository:
-      type: postgres
+      type: 'postgres'
+    storage:
+      type: 'minio'
+      minio:
+        endpoint: '192.168.49.49'
+        port: '9000'
+        access-key: 'IOprSEUNkRwU42sxj4Gs'
+        secret-key: 'y3kyfEEKl9rIYGptn2b7Y1nu8Fb8hNrc4gOVQ8DM'
+        secure: 'false'
+        bucket: 'kestra'
 
 extraEnv:
   - name: DATASOURCES_POSTGRES_USERNAME
@@ -46,7 +55,7 @@ elasticsearch:
   enabled: false
 
 minio:
-  enabled: true
+  enabled: false
 
 postgresql:
   enabled: false

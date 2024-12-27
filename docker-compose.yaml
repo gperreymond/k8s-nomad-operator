@@ -2,6 +2,7 @@ name: 'k8s-nomad-operator'
 
 include:
   - 'compose/services/traefik.yaml'
+  - 'compose/services/minio-single.yaml'
   - 'compose/services/kestra.yaml'
   - 'compose/services/keycloak.yaml'
   - 'compose/services/nomad-europe-paris.yaml'
