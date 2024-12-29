@@ -50,7 +50,7 @@ resource "kubernetes_manifest" "argocd_applications" {
       values_target_revision = "main"
     }
     prometheus_operator = {
-      destination = kubernetes_namespace.monitoring_system.id
+      destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
   }))

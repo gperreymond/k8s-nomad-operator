@@ -13,8 +13,8 @@ spec:
       prune: true
       selfHeal: true
   sources:
-    - repoURL: https://helm.kestra.io/
-      chart: kestra
+    - repoURL: https://github.com/gperreymond/k8s-nomad-operator.git
+      path: charts/remote-charts/prometheus-operator
       targetRevision: ${prometheus_operator.git_target_revision}
   destination:
     server: https://kubernetes.default.svc
