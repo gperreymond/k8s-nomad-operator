@@ -9,6 +9,8 @@ metadata:
 spec:
   project: internal
   syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
