@@ -3,7 +3,4 @@ kind: Service
 metadata:
   name: prometheus-operator
   namespace: monitoring
-spec:
-  template:
-    metadata:
-      namespace: monitoring-system
+spec: {}
