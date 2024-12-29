@@ -14,7 +14,9 @@ spec:
           serviceName: prometheus-main
           servicePort: 9090
         path: /prometheus(/|$)(.*)
+        pathType: ImplementationSpecific
       - backend:
           serviceName: alertmanager-main
           servicePort: 9093
         path: /alertmanager(/|$)(.*)
+        pathType: ImplementationSpecific
