@@ -17,6 +17,8 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/setup/0alertmanagerConfigCustomResourceDefinition.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheusOperator-service.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheusOperator-serviceAccount.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheusOperator-clusterRole.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheusOperator-clusterRoleBinding.yaml
 
 patchesStrategicMerge:
 - patches/patch-prometheusOperator-service.yaml
