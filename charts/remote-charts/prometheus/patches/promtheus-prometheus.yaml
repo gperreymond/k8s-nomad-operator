@@ -1,0 +1,7 @@
+spec:
+  version: '3.0.1'
+  thanos:
+    image: quay.io/thanos/thanos:v0.37.2
+    objectStorageConfig:
+      key: thanos.yaml
+      name: thanos-objstore-config
