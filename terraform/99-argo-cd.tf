@@ -49,6 +49,10 @@ resource "kubernetes_manifest" "argocd_applications" {
       chart_target_revision  = local.HELM_STAKATER_RELOADER_VERSION
       values_target_revision = "main"
     }
+    prometheus_operator = {
+      destination = kubernetes_namespace.monitoring_system.id
+      git_target_revision = "main"
+    }
   }))
 
   depends_on = [
