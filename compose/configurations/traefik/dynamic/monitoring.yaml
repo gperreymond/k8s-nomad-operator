@@ -1,0 +1,11 @@
+http:
+  services:
+    monitoring:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://minikube"
+  routers:
+    monitoring:
+      rule: "Host(`monitoring.docker.localhost`)"
+      service: monitoring@file
