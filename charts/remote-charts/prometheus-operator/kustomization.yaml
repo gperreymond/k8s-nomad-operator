@@ -14,3 +14,12 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/setup/0servicemonitorCustomResourceDefinition.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/setup/0thanosrulerCustomResourceDefinition.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/setup/0alertmanagerConfigCustomResourceDefinition.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheusOperator-service.yaml
+
+patches:
+- patch: |-
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: prometheus-operator
+      namespace: monitoring-system
