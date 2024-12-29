@@ -1,3 +1,8 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: k8s
+  namespace: monitoring
 spec:
   version: '3.0.1'
   thanos:
