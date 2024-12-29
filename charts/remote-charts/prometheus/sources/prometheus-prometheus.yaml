@@ -10,6 +10,7 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  externalUrl: http://monitoring.docker.localhost/prometheus
   thanos:
     image: quay.io/thanos/thanos:v0.37.2
     objectStorageConfig:

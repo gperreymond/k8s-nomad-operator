@@ -8,7 +8,6 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRoleBinding.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-networkPolicy.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-podDisruptionBudget.yaml
-  - sources/prometheus-prometheus.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-prometheusRule.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingConfig.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingSpecificNamespaces.yaml
@@ -17,11 +16,5 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-service.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceAccount.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml
-
-patches:
-  - path: 'patches/prometheus-prometheus.yaml'
-    target:
-      version: monitoring.coreos.com/v1
-      kind: Prometheus
-      name: k8s
-      namespace: monitoring
+  - sources/prometheus-prometheus.yaml
+  - sources/ingress.yaml

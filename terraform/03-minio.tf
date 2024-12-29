@@ -45,11 +45,11 @@ resource "minio_iam_user_policy_attachment" "kestra" {
 }
 
 // ----------------------------
-// MONITORING
+// THANOS
 // ----------------------------
 
-resource "minio_iam_user" "monitoring" {
-  name          = "monitoring-system"
+resource "minio_iam_user" "thanos" {
+  name          = "thanos"
   force_destroy = true
   update_secret = true
 
@@ -57,37 +57,37 @@ resource "minio_iam_user" "monitoring" {
     null_resource.keycloak
   ]
 }
-resource "minio_s3_bucket" "monitoring" {
-  bucket = "monitoring"
+resource "minio_s3_bucket" "thanos" {
+  bucket = "thanos"
   acl    = "private"
 
   depends_on = [
     null_resource.keycloak
   ]
 }
-resource "minio_iam_service_account" "monitoring" {
-  target_user = minio_iam_user.monitoring.name
+resource "minio_iam_service_account" "thanos" {
+  target_user = minio_iam_user.thanos.name
 }
-resource "minio_iam_policy" "monitoring" {
-  name   = "monitoring-admin"
+resource "minio_iam_policy" "thanos" {
+  name   = "thanos-admin"
   policy = <<EOF
 {
   "Version":"2012-10-17",
   "Statement": [
     {
-      "Sid":"MonitoringAdmin",
+      "Sid":"thanosAdmin",
       "Effect": "Allow",
       "Action": ["s3:*"],
       "Principal":"*",
-      "Resource": ["${minio_s3_bucket.monitoring.arn}", "${minio_s3_bucket.monitoring.arn}/*"]
+      "Resource": ["${minio_s3_bucket.thanos.arn}", "${minio_s3_bucket.thanos.arn}/*"]
     }
   ]
 }
 EOF
 }
-resource "minio_iam_user_policy_attachment" "monitoring" {
-  user_name   = minio_iam_user.monitoring.id
-  policy_name = minio_iam_policy.monitoring.name
+resource "minio_iam_user_policy_attachment" "thanos" {
+  user_name   = minio_iam_user.thanos.id
+  policy_name = minio_iam_policy.thanos.name
 }
 
 
@@ -100,11 +100,11 @@ resource "null_resource" "minio" {
     minio_iam_user_policy_attachment.kestra,
     minio_iam_policy.kestra,
     minio_s3_bucket.kestra,
-    // monitoring
-    minio_iam_user.monitoring,
-    minio_iam_service_account.monitoring,
-    minio_iam_user_policy_attachment.monitoring,
-    minio_iam_policy.monitoring,
-    minio_s3_bucket.monitoring,
+    // thanos
+    minio_iam_user.thanos,
+    minio_iam_service_account.thanos,
+    minio_iam_user_policy_attachment.thanos,
+    minio_iam_policy.thanos,
+    minio_s3_bucket.thanos,
   ]
 }
