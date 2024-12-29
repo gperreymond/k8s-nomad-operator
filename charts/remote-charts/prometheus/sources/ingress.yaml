@@ -13,12 +13,14 @@ spec:
       - backend:
           service:
             name: prometheus-main
-            port: '9090'
+            port:
+              number: 9090
         path: /prometheus(/|$)(.*)
         pathType: ImplementationSpecific
       - backend:
           service:
             name: alertmanager-main
-            port: '9093'
+            port:
+              number: 9093
         path: /alertmanager(/|$)(.*)
         pathType: ImplementationSpecific
