@@ -56,3 +56,10 @@ I choose to download the binary into ".bin" directory in this repo.
 ```sh
 $ sudo ./scripts/nomad-client.sh
 ```
+
+## Documentations
+
+* https://github.com/prometheus-operator/kube-prometheus/
+* https://github.com/prometheus-operator/kube-prometheus/blob/v0.14.0/kustomization.yaml
+* https://prometheus-operator.dev/
+* https://prometheus-operator.dev/docs/platform/thanos/

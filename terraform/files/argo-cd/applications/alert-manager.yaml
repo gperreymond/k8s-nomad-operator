@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: alert-manager
+  namespace: ${argo_cd_namespace}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: internal
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  sources:
+    - repoURL: https://github.com/gperreymond/k8s-nomad-operator.git
+      path: charts/remote-charts/alert-manager
+      targetRevision: ${alert_manager.git_target_revision}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ${alert_manager.destination}
