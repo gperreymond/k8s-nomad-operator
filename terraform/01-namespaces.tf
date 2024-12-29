@@ -17,6 +17,11 @@ resource "kubernetes_namespace" "monitoring_system" {
     name = "monitoring-system"
   }
 }
+resource "kubernetes_namespace" "monitoring" {
+  metadata {
+    name = "monitoring"
+  }
+}
 
 // ----------------------------
 // NOMAD
@@ -35,6 +40,8 @@ resource "null_resource" "namespaces" {
     // kubernetes
     kubernetes_namespace.argo_system,
     kubernetes_namespace.kestra_system,
+    kubernetes_namespace.monitoring_system,
+    kubernetes_namespace.monitoring,
     // nomad
     nomad_namespace.kestra_system,
     nomad_namespace.monitoring_system,
