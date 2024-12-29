@@ -18,7 +18,7 @@ YAML
   ]
 
   depends_on = [
-    null_resource.kestra,
+    null_resource.monitoring,
   ]
 }
 
@@ -58,7 +58,7 @@ resource "kubernetes_manifest" "argocd_applications" {
 
 resource "null_resource" "argo" {
   depends_on = [
-    null_resource.kestra,
+    null_resource.monitoring,
     helm_release.argo_cd,
     kubernetes_manifest.argocd_projects,
     kubernetes_manifest.argocd_applications,

@@ -25,6 +25,10 @@ kestra:
 YAML
 }
 
+// ----------------------------
+// KUBERNETES
+// ----------------------------
+
 resource "kubernetes_secret" "kestra_configuration" {
   metadata {
     name      = "kestra-external-configuration"
@@ -39,6 +43,10 @@ resource "kubernetes_secret" "kestra_configuration" {
   ]
 }
 
+// ----------------------------
+// NOMAD
+// ----------------------------
+
 resource "nomad_variable" "kestra_configuration" {
   path      = "kestra-external-configuration"
   namespace = nomad_namespace.kestra_system.id
@@ -50,7 +58,6 @@ resource "nomad_variable" "kestra_configuration" {
     null_resource.minio,
   ]
 }
-
 resource "nomad_job" "kestra_workers" {
   jobspec = file("${path.module}/files/nomad/kestra/kestra-workers.hcl")
   hcl2 {
@@ -68,7 +75,9 @@ resource "nomad_job" "kestra_workers" {
 resource "null_resource" "kestra" {
   depends_on = [
     null_resource.minio,
+    // kubernetes
     kubernetes_secret.kestra_configuration,
+    // nomad
     nomad_variable.kestra_configuration,
     nomad_job.kestra_workers,
   ]

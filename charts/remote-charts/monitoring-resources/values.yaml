@@ -1,0 +1,6 @@
+apiVersion: v2
+name: monitoring-resources
+description: All monitoring resources
+type: application
+
+version: 1.0.0
