@@ -13,7 +13,7 @@ spec:
       paths:
       - backend:
           service:
-            name: prometheus-main
+            name: prometheus-k8s
             port:
               number: 9090
         path: /prometheus(/|$)(.*)
