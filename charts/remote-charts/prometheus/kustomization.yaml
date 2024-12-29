@@ -20,7 +20,6 @@ resources:
 
 patches:
   - target:
-      apiVersion: monitoring.coreos.com/v1
       kind: Prometheus
       name: k8s
     patch: |-
