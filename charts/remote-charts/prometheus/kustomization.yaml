@@ -18,5 +18,21 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceAccount.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml
 
-patchs:
-  - ./patchs/prometheus-prometheus.yaml
+patches:
+  - target:
+      apiVersion: monitoring.coreos.com/v1
+      kind: Prometheus
+      name: k8s
+    patch: |-
+      - op: replace
+        path: /spec/version 
+        value: '3.0.1'
+      - op: add
+        path: /spec/thanos/image 
+        value: 'quay.io/thanos/thanos:v0.37.2'
+      - op: add
+        path: /spec/thanos/objectStorageConfig/key 
+        value: 'thanos.yaml'
+      - op: add
+        path: /spec/thanos/objectStorageConfig/name 
+        value: 'thanos-objstore-config'
