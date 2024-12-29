@@ -19,5 +19,5 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceAccount.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml
 
-patchesStrategicMerge:
-  - patchs/prometheus-prometheus.yaml
+# patchesStrategicMerge:
+#   - patchs/prometheus-prometheus.yaml
