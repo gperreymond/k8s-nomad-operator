@@ -19,7 +19,7 @@ resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml
 
 patches:
-  - path: 'patches'
+  - path: 'patches/prometheus-prometheus.yaml'
     target:
       version: monitoring.coreos.com/v1
       kind: Prometheus
