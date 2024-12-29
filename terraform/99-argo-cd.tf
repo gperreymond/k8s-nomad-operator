@@ -53,7 +53,7 @@ resource "kubernetes_manifest" "argocd_applications" {
       destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
-    prometheus = {
+    monitoring = {
       destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
