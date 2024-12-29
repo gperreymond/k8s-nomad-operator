@@ -5,19 +5,19 @@ namespace: monitoring-system
 # https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/
 
 resources:
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-clusterRole.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-clusterRoleBinding.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-networkPolicy.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-podDisruptionBudget.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-prometheus.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-prometheusRule.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-roleBindingConfig.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-roleBindingSpecificNamespaces.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-roleConfig.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-roleSpecificNamespaces.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-service.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-serviceAccount.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/prometheus-serviceMonitor.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRole.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRoleBinding.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-networkPolicy.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-podDisruptionBudget.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-prometheus.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-prometheusRule.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingConfig.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingSpecificNamespaces.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleConfig.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleSpecificNamespaces.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-service.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceAccount.yaml
+  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml
 
 patchesStrategicMerge:
   - patchs/prometheus-prometheus.yaml.yaml
