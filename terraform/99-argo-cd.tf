@@ -54,11 +54,15 @@ resource "kubernetes_manifest" "argocd_applications" {
       git_target_revision = "main"
     }
     prometheus = {
-      destination         = kubernetes_namespace.monitoring_system.id
+      destination         = kubernetes_namespace.monitoring.id
       git_target_revision = "main"
     }
     alert_manager = {
-      destination         = kubernetes_namespace.monitoring_system.id
+      destination         = kubernetes_namespace.monitoring.id
+      git_target_revision = "main"
+    }
+    thanos = {
+      destination         = kubernetes_namespace.thanos.id
       git_target_revision = "main"
     }
   }))

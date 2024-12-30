@@ -1,11 +1,12 @@
 locals {
   thanos_objstore_configuration = <<YAML
-type: s3
+type: 's3'
 config:
-  bucket: thanos
+  bucket: 'thanos'
   endpoint: '${var.provider_minio_server}:${var.provider_minio_server_port}'
   access_key: '${minio_iam_service_account.thanos.access_key}'
   secret_key: '${minio_iam_service_account.thanos.secret_key}'
+  insecure: true
 YAML
 }
 

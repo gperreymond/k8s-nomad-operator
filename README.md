@@ -33,6 +33,8 @@ $ kubectl -n argo-system get secret argocd-initial-admin-secret -o jsonpath="{.d
 * http://traefik.docker.localhost/
 * http://keycloak.docker.localhost/
 * http://minio-webui.docker.localhost/
+* http://monitoring.docker.localhost/alertmanager/
+* http://monitoring.docker.localhost/prometheus/
 * http://kestra.docker.localhost/
 * http://nomad.europe-paris.docker.localhost/
 
@@ -63,3 +65,5 @@ $ sudo ./scripts/nomad-client.sh
 * https://github.com/prometheus-operator/kube-prometheus/blob/v0.14.0/kustomization.yaml
 * https://prometheus-operator.dev/
 * https://prometheus-operator.dev/docs/platform/thanos/
+* https://github.com/thanos-io/kube-thanos/
+* https://github.com/thanos-io/kube-thanos/blob/v0.29.0/kustomization.yaml

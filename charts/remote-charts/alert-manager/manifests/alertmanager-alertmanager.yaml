@@ -12,6 +12,7 @@ metadata:
   namespace: monitoring
 spec:
   externalUrl: http://monitoring.docker.localhost/alertmanager
+  version: 0.27.0
   image: quay.io/prometheus/alertmanager:v0.27.0
   nodeSelector:
     kubernetes.io/os: linux
@@ -36,4 +37,3 @@ spec:
     runAsNonRoot: true
     runAsUser: 1000
   serviceAccountName: alertmanager-main
-  version: 0.27.0
