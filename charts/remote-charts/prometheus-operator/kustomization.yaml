@@ -2,8 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring-system
 
-# https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/
-
 resources:
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/setup/0alertmanagerCustomResourceDefinition.yaml
   - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/setup/0podmonitorCustomResourceDefinition.yaml
