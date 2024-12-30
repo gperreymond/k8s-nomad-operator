@@ -48,4 +48,4 @@ for file in $output_dir/alertmanager-*.yaml; do
   fi
 done
 
-# rm -rf build
+rm -rf build
