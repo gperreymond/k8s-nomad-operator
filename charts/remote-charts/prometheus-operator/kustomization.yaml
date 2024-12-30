@@ -3,16 +3,16 @@ kind: Kustomization
 namespace: monitoring-system
 
 resources:
-  - ./manifests/setup/0alertmanagerCustomResourceDefinition.yaml
-  - ./manifests/setup/0podmonitorCustomResourceDefinition.yaml
-  - ./manifests/setup/0probeCustomResourceDefinition.yaml
-  - ./manifests/setup/0prometheusCustomResourceDefinition.yaml
-  - ./manifests/setup/0prometheusagentCustomResourceDefinition.yaml
-  - ./manifests/setup/0prometheusruleCustomResourceDefinition.yaml
-  - ./manifests/setup/0scrapeconfigCustomResourceDefinition.yaml
-  - ./manifests/setup/0servicemonitorCustomResourceDefinition.yaml
-  - ./manifests/setup/0thanosrulerCustomResourceDefinition.yaml
-  - ./manifests/setup/0alertmanagerConfigCustomResourceDefinition.yaml
+  - ./manifests/0alertmanagerCustomResourceDefinition.yaml
+  - ./manifests/0podmonitorCustomResourceDefinition.yaml
+  - ./manifests/0probeCustomResourceDefinition.yaml
+  - ./manifests/0prometheusCustomResourceDefinition.yaml
+  - ./manifests/0prometheusagentCustomResourceDefinition.yaml
+  - ./manifests/0prometheusruleCustomResourceDefinition.yaml
+  - ./manifests/0scrapeconfigCustomResourceDefinition.yaml
+  - ./manifests/0servicemonitorCustomResourceDefinition.yaml
+  - ./manifests/0thanosrulerCustomResourceDefinition.yaml
+  - ./manifests/0alertmanagerConfigCustomResourceDefinition.yaml
   - ./manifests/prometheusOperator-service.yaml
   - ./manifests/prometheusOperator-serviceAccount.yaml
   - ./manifests/prometheusOperator-clusterRole.yaml
