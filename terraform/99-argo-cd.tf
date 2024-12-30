@@ -57,12 +57,16 @@ resource "kubernetes_manifest" "argocd_applications" {
       destination         = kubernetes_namespace.monitoring.id
       git_target_revision = "main"
     }
-    alert_manager = {
+    alertmanager = {
       destination         = kubernetes_namespace.monitoring.id
       git_target_revision = "main"
     }
     thanos = {
       destination         = kubernetes_namespace.thanos.id
+      git_target_revision = "main"
+    }
+    kube_state_metrics = {
+      destination         = kubernetes_namespace.monitoring.id
       git_target_revision = "main"
     }
   }))

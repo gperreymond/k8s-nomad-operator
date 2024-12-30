@@ -77,5 +77,5 @@ process_manifests "kube-state-metrics"
 process_manifests "prometheus"
 
 # Final cleanup
-# rm -rf "$BUILD_DIR"
+rm -rf "$BUILD_DIR"
 log "INFO" "All manifests have been processed successfully."
