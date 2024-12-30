@@ -1,3 +1,4 @@
+---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
@@ -10,15 +11,22 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  externalUrl: http://monitoring.docker.localhost/prometheus
+  version: 2.54.1
+  image: quay.io/prometheus/prometheus:v2.54.1
+  thanos:
+    image: quay.io/thanos/thanos:v0.37.2
+    objectStorageConfig:
+      key: thanos.yaml
+      name: thanos-objstore-config
   alerting:
     alertmanagers:
-    - apiVersion: v2
-      name: alertmanager-main
-      namespace: monitoring
-      port: web
+      - apiVersion: v2
+        name: alertmanager-main
+        namespace: monitoring
+        port: web
   enableFeatures: []
   externalLabels: {}
-  image: quay.io/prometheus/prometheus:v2.54.1
   nodeSelector:
     kubernetes.io/os: linux
   podMetadata:
@@ -47,4 +55,3 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: 2.54.1

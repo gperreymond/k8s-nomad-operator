@@ -2,17 +2,17 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRole.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRoleBinding.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-networkPolicy.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-podDisruptionBudget.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-prometheusRule.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingConfig.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingSpecificNamespaces.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleConfig.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleSpecificNamespaces.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-service.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceAccount.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml
-  - ./manifests/prometheus-prometheus.yaml
-  - ./manifests/ingress.yaml
+  - ./manifests/prometheus-clusterRole.yaml
+  - ./manifests/prometheus-clusterRoleBinding.yaml
+  - ./manifests/prometheus-networkPolicy.yaml
+  - ./manifests/prometheus-podDisruptionBudget.yaml
+  - ./manifests/prometheus-prometheusRule.yaml
+  - ./files/prometheus-roleBindingConfig.yaml
+  - ./manifests/prometheus-roleBindingSpecificNamespaces.yaml
+  - ./files/prometheus-roleConfig.yaml
+  - ./manifests/prometheus-roleSpecificNamespaces.yaml
+  - ./files/prometheus-prometheus.yaml
+  - ./manifests/prometheus-service.yaml
+  - ./manifests/prometheus-serviceAccount.yaml
+  - ./manifests/prometheus-serviceMonitor.yaml
+  - ./files/ingress.yaml

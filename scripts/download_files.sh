@@ -31,13 +31,59 @@ urls=(
   "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheusOperator-deployment.yaml"
 )
 
+echo "[INFO] prometheus-operator"
 for url in "${urls[@]}"; do
   filename=$(basename "$url")
   curl -so "$destination_dir/$filename" "$url"
   if [ $? -eq 0 ]; then
-    echo "[INFO] successfully downloaded $filename"
+    echo "[INFO]... successfully downloaded $filename"
   else
-    echo "[ERROR] failed to download $filename"
+    echo "[ERROR]... failed to download $filename"
+    exit 1
+  fi
+  echo
+done
+echo "[INFO] All files have been downloaded."
+mv $destination_dir/*.* "$final_dir"
+echo "[INFO] All files have been moved."
+
+# ------------------------------------------
+# Prometheus Operator
+# ------------------------------------------
+
+destination_dir=".tmp/files/prometheus"
+rm -rf "$destination_dir"
+mkdir -p "$destination_dir"
+
+final_dir="charts/remote-charts/prometheus/manifests"
+rm -rf "$final_dir"
+mkdir -p "$final_dir"
+
+urls=(
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRole.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-clusterRoleBinding.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-networkPolicy.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-podDisruptionBudget.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-prometheusRule.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingConfig.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleBindingSpecificNamespaces.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleConfig.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-roleSpecificNamespaces.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-service.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-prometheus.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceAccount.yaml"
+  "https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/refs/tags/v0.14.0/manifests/prometheus-serviceMonitor.yaml"
+)
+
+echo ""
+echo "[INFO] prometheus"
+for url in "${urls[@]}"; do
+  filename=$(basename "$url")
+  curl -so "$destination_dir/$filename" "$url"
+  if [ $? -eq 0 ]; then
+    echo "[INFO]... successfully downloaded"
+  else
+    echo "[ERROR]... failed to download $filename"
     exit 1
   fi
   echo
