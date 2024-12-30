@@ -35,10 +35,7 @@ spec:
       app.kubernetes.io/name: prometheus
       app.kubernetes.io/part-of: kube-prometheus
       app.kubernetes.io/version: 2.54.1
-  podMonitorNamespaceSelector:
-    matchNames:
-      - monitoring
-      - thanos
+  podMonitorNamespaceSelector: {}
   podMonitorSelector: {}
   probeNamespaceSelector: {}
   probeSelector: {}
@@ -55,8 +52,5 @@ spec:
     runAsNonRoot: true
     runAsUser: 1000
   serviceAccountName: prometheus-k8s
-  serviceMonitorNamespaceSelector:
-    matchNames:
-      - monitoring
-      - thanos
+  serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
