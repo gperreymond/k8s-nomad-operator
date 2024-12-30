@@ -22,6 +22,17 @@ $ terraform apply -target helm_release.argo_cd
 $ terraform apply
 ```
 
+## Optional: JSONNET
+
+```sh
+# we use jsonnet and jb to generate dedicated manifests
+# install all only if you want to update
+$ go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
+$ go install github.com/brancz/gojsontoyaml@latest
+$ ~/go/bin/jb install
+$ devbox run jsonnet:build
+```
+
 ## Utils
 
 ```sh

@@ -1,7 +1,10 @@
 .devbox
 devbox.lock
 
-.tmp
+vendor
+build
+jsonnetfile.lock.json
+
 .bin
 .terraform
 .terraform.lock.hcl
