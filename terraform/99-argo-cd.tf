@@ -69,6 +69,10 @@ resource "kubernetes_manifest" "argocd_applications" {
       destination         = kubernetes_namespace.monitoring.id
       git_target_revision = "main"
     }
+    node_exporter = {
+      destination         = kubernetes_namespace.monitoring.id
+      git_target_revision = "main"
+    }
   }))
 
   depends_on = [

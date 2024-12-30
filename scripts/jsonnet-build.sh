@@ -75,6 +75,7 @@ process_manifests "prometheus-operator"
 process_manifests "alertmanager"
 process_manifests "kube-state-metrics"
 process_manifests "prometheus"
+process_manifests "node-exporter"
 
 # Final cleanup
 rm -rf "$BUILD_DIR"
