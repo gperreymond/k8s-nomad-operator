@@ -47,4 +47,9 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
+  thanos:
+    image: quay.io/thanos/thanos:v0.37.2
+    objectStorageConfig:
+      key: thanos.yaml
+      name: thanos-objstore-config
   version: 2.54.1

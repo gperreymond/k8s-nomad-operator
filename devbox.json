@@ -14,15 +14,7 @@
     ],
     "scripts": {
       "jsonnet:build": [
-        "rm -rf build",
-        "mkdir -p build/manifests/setup",
-        "jsonnet -J vendor -m build/manifests kube-prometheus.jsonnet | xargs -I{} sh -c 'cat {} | ~/go/bin/gojsontoyaml > {}.yaml' -- {}",
-        "find build/manifests -type f ! -name '*.yaml' -delete"
-      ],
-      "jsonnet:copy": [
-        "rm -rf charts/remote-charts/prometheus-operator/manifests",
-        "mkdir -p charts/remote-charts/prometheus-operator/manifests",
-        "mv build/manifests/setup/prometheus-operator-*.yaml charts/remote-charts/prometheus-operator/manifests"
+        "./scripts/jsonnet-build.sh"
       ],
       "docker-compose:config": [
         "docker compose --env-file compose/global.vars config"
