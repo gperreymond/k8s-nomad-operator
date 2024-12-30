@@ -3,4 +3,19 @@ kind: Kustomization
 namespace: monitoring-system
 
 resources:
-  - ./manifests
+  - ./manifests/prometheus-operator-0alertmanagerCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0podmonitorCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0probeCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0prometheusCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0prometheusagentCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0prometheusruleCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0scrapeconfigCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0servicemonitorCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0thanosrulerCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-0alertmanagerConfigCustomResourceDefinition.yaml
+  - ./manifests/prometheus-operator-service.yaml
+  - ./manifests/prometheus-operator-serviceAccount.yaml
+  - ./manifests/prometheus-operator-clusterRole.yaml
+  - ./manifests/prometheus-operator-clusterRoleBinding.yaml
+  - ./manifests/prometheus-operator-networkPolicy.yaml
+  - ./manifests/prometheus-operator-deployment.yaml
