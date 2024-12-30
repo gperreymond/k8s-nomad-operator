@@ -1,51 +1,81 @@
 #!/bin/bash
 
-rm -rf build
-mkdir -p build/manifests/setup
-jsonnet -J vendor -m build/manifests kube-prometheus.jsonnet | xargs -I{} sh -c 'cat {} | ~/go/bin/gojsontoyaml > {}.yaml' -- {}
-find build/manifests -type f ! -name '*.yaml' -delete
+set -euo pipefail
 
-output_dir="charts/remote-charts/prometheus-operator/manifests"
-rm -rf $output_dir
-mkdir -p $output_dir
-mv build/manifests/prometheus-operator-*.yaml $output_dir
-mv build/manifests/setup/prometheus-operator-*.yaml $output_dir
-echo "apiVersion: kustomize.config.k8s.io/v1beta1" > $output_dir/kustomization.yaml
-echo "kind: Kustomization" >> $output_dir/kustomization.yaml
-echo "resources:" >> $output_dir/kustomization.yaml
-for file in $output_dir/prometheus-operator-*.yaml; do
-  echo "[INFO] add $file to kustomization.yaml"
-  if [ -f "$file" ]; then
-    echo "  - $(basename "$file")" >> $output_dir/kustomization.yaml
+# Configuration
+BUILD_DIR="build"
+CHARTS_DIR="charts/remote-charts"
+JSONNET_FILE="kube-prometheus.jsonnet"
+
+# Preliminary checks
+command -v jsonnet >/dev/null || { echo "[ERROR] jsonnet is required but not found."; exit 1; }
+command -v ~/go/bin/gojsontoyaml >/dev/null || { echo "[ERROR] gojsontoyaml is required but not found."; exit 1; }
+
+# Logging with timestamps
+log() {
+  local level="$1"
+  local message="$2"
+  echo "[$(date +'%Y-%m-%d %H:%M:%S')] [$level] $message"
+}
+
+# Directory preparation
+log "INFO" "Cleaning up directories..."
+rm -rf "$BUILD_DIR"
+mkdir -p "$BUILD_DIR/manifests/setup"
+
+# Generate manifests
+log "INFO" "Generating manifests using jsonnet..."
+jsonnet -J vendor -m "$BUILD_DIR/manifests" "$JSONNET_FILE" \
+  | xargs -I{} sh -c 'cat {} | ~/go/bin/gojsontoyaml > {}.yaml' -- {}
+find "$BUILD_DIR/manifests" -type f ! -name '*.yaml' -delete
+
+log "DEBUG" "Generated files in $BUILD_DIR/manifests:"
+ls -l "$BUILD_DIR/manifests"
+
+# Function to process manifests
+process_manifests() {
+  local prefix="$1"
+  local output_dir="$CHARTS_DIR/$prefix/manifests"
+
+  log "INFO" "Processing manifests for prefix: $prefix..."
+  rm -rf "$output_dir"
+  mkdir -p "$output_dir"
+
+  local matched_files=()
+  while IFS= read -r -d '' file; do
+    matched_files+=("$file")
+  done < <(find "$BUILD_DIR/manifests" -type f -name "${prefix}-*.yaml" -print0)
+
+  if [ ${#matched_files[@]} -eq 0 ]; then
+    log "WARNING" "No files found matching prefix ${prefix}-*.yaml."
+    return
   fi
-done
 
-output_dir="charts/remote-charts/prometheus/manifests"
-rm -rf $output_dir
-mkdir -p $output_dir
-mv build/manifests/prometheus-*.yaml $output_dir
-echo "apiVersion: kustomize.config.k8s.io/v1beta1" > $output_dir/kustomization.yaml
-echo "kind: Kustomization" >> $output_dir/kustomization.yaml
-echo "resources:" >> $output_dir/kustomization.yaml
-for file in $output_dir/prometheus-*.yaml; do
-  echo "[INFO] add $file to kustomization.yaml"
-  if [ -f "$file" ]; then
-    echo "  - $(basename "$file")" >> $output_dir/kustomization.yaml
-  fi
-done
+  for file in "${matched_files[@]}"; do
+    log "INFO" "Moving $(basename "$file") to $output_dir"
+    mv "$file" "$output_dir"
+  done
 
-output_dir="charts/remote-charts/alert-manager/manifests"
-rm -rf $output_dir
-mkdir -p $output_dir
-mv build/manifests/alertmanager-*.yaml $output_dir
-echo "apiVersion: kustomize.config.k8s.io/v1beta1" > $output_dir/kustomization.yaml
-echo "kind: Kustomization" >> $output_dir/kustomization.yaml
-echo "resources:" >> $output_dir/kustomization.yaml
-for file in $output_dir/alertmanager-*.yaml; do
-  echo "[INFO] add $file to kustomization.yaml"
-  if [ -f "$file" ]; then
-    echo "  - $(basename "$file")" >> $output_dir/kustomization.yaml
-  fi
-done
+  local kustomization_file="$output_dir/kustomization.yaml"
+  log "INFO" "Creating $kustomization_file"
+  {
+    echo "apiVersion: kustomize.config.k8s.io/v1beta1"
+    echo "kind: Kustomization"
+    echo "resources:"
+    for file in "$output_dir"/*.yaml; do
+      if [ "$(basename "$file")" != "kustomization.yaml" ]; then
+        echo "  - $(basename "$file")"
+      fi
+    done
+  } > "$kustomization_file"
+}
 
-rm -rf build
+# Process specific prefixes
+process_manifests "prometheus-operator"
+process_manifests "alertmanager"
+process_manifests "kube-state-metrics"
+process_manifests "prometheus"
+
+# Final cleanup
+# rm -rf "$BUILD_DIR"
+log "INFO" "All manifests have been processed successfully."
