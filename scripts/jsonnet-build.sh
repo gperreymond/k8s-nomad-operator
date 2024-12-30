@@ -76,7 +76,8 @@ process_manifests "alertmanager"
 process_manifests "kube-state-metrics"
 process_manifests "prometheus"
 process_manifests "node-exporter"
+process_manifests "kubernetes"
 
 # Final cleanup
-rm -rf "$BUILD_DIR"
+# rm -rf "$BUILD_DIR"
 log "INFO" "All manifests have been processed successfully."

@@ -73,6 +73,10 @@ resource "kubernetes_manifest" "argocd_applications" {
       destination         = kubernetes_namespace.monitoring.id
       git_target_revision = "main"
     }
+    kubernetes = {
+      destination         = kubernetes_namespace.monitoring.id
+      git_target_revision = "main"
+    }
   }))
 
   depends_on = [

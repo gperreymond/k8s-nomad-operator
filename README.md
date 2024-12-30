@@ -40,7 +40,6 @@ $ devbox run jsonnet:build
 $ kubectl -n argo-system get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
-* https://marketplace.upbound.io/
 * http://traefik.docker.localhost/
 * http://keycloak.docker.localhost/
 * http://minio-webui.docker.localhost/
@@ -72,8 +71,8 @@ $ sudo ./scripts/nomad-client.sh
 
 ## Documentations
 
+* https://runbooks.prometheus-operator.dev/
 * https://github.com/prometheus-operator/kube-prometheus/
-* https://github.com/prometheus-operator/kube-prometheus/blob/v0.14.0/kustomization.yaml
 * https://prometheus-operator.dev/
 * https://prometheus-operator.dev/docs/platform/thanos/
 * https://github.com/thanos-io/kube-thanos/
