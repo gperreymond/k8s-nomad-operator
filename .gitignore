@@ -1,6 +1,7 @@
 .devbox
 devbox.lock
 
+.tmp
 .bin
 .terraform
 .terraform.lock.hcl
