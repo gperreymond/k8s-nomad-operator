@@ -9,7 +9,7 @@ resources:
   - ./manifests/prometheus-prometheusRule.yaml
   - ./files/prometheus-roleBindingConfig.yaml
   - ./manifests/prometheus-roleBindingSpecificNamespaces.yaml
-  - ./files/prometheus-roleConfig.yaml
+  - ./manifests/prometheus-roleConfig.yaml
   - ./manifests/prometheus-roleSpecificNamespaces.yaml
   - ./files/prometheus-prometheus.yaml
   - ./manifests/prometheus-service.yaml
