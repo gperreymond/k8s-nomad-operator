@@ -7,3 +7,7 @@ resources:
   - thanos-store-serviceAccount.yaml
   - thanos-store-statefulSet.yaml
   - thanos-store-serviceMonitor.yaml
+  - thanos-compact-service.yaml
+  - thanos-compact-serviceAccount.yaml
+  - thanos-compact-statefulSet.yaml
+  - thanos-compact-serviceMonitor.yaml
