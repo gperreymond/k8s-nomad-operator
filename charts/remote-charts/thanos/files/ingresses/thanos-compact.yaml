@@ -1,0 +1,18 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: thanos-compact
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: thanos-compact.docker.localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: thanos-compact
+            port:
+              number: 10902
+        path: /
+        pathType: ImplementationSpecific
