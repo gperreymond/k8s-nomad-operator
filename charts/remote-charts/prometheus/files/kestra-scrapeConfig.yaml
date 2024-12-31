@@ -22,7 +22,7 @@ spec:
   NomadSDConfigs:
     - server: "http://192.168.49.21:4646"
       namespace: "kestra-system"
-  relabelConfigs:
+  metricRelabelings:
     - sourceLabels: [__meta_nomad_job_name]
       regex: ".*"
       targetLabel: job
