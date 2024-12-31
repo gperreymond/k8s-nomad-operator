@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: monitoring-system
 
 resources:
-  - ./manifests
+  - manifests

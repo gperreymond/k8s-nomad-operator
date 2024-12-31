@@ -3,7 +3,5 @@ kind: Kustomization
 namespace: thanos
 
 resources:
-  - ./manifests/thanos-store-service.yaml
-  - ./manifests/thanos-store-serviceAccount.yaml
-  - ./manifests/thanos-store-statefulSet.yaml
-  - ./manifests/thanos-store-serviceMonitor.yaml
+  - files
+  - manifests
