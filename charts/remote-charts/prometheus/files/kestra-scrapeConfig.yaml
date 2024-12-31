@@ -1,3 +1,4 @@
+---
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
@@ -9,3 +10,25 @@ spec:
   staticConfigs:
     - targets:
         - "kestra-service.kestra-system:8081"
+
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: nomad-scrape-config
+  namespace: monitoring
+spec:
+  jobName: "kestra-nomad"
+  nomadSdConfigs:
+    - server: "http://192.168.49.21:4646"
+      namespace: "kestra-system"
+  relabelConfigs:
+    - sourceLabels: [__meta_nomad_job_name]
+      regex: ".*"
+      targetLabel: job
+    - sourceLabels: [__meta_nomad_task_name]
+      targetLabel: task
+    - sourceLabels: [__meta_nomad_alloc_id]
+      targetLabel: alloc_id
+  metricsPath: "/prometheus"
+  scheme: "http"
