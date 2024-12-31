@@ -6,7 +6,13 @@ local kp =
         namespace: 'monitoring',
       },
       prometheus+:: {
-        namespaces: ["kube-system", "monitoring", "thanos", "monitoring-system"],
+        namespaces: [
+          "kube-system",
+          "monitoring",
+          "thanos",
+          "monitoring-system",
+          "kestra-system"
+        ],
         thanos: {
           image: "quay.io/thanos/thanos:v0.37.2",
           objectStorageConfig: {
