@@ -1,6 +1,10 @@
 annotations:
   reloader.stakater.com/auto: "true"
 
+service:
+  management:
+    enabled: true
+
 deployments:
   standalone:
     enabled: false

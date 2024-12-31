@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: kestra-scrape-config
+spec:
+  jobName: "kestra"
+  metricsPath: "/prometheus"
+  staticConfigs:
+    - targets:
+        - "kestra-service.kestra-system:8081"
