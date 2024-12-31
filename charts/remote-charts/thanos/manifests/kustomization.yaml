@@ -11,3 +11,7 @@ resources:
   - thanos-compact-serviceAccount.yaml
   - thanos-compact-statefulSet.yaml
   - thanos-compact-serviceMonitor.yaml
+  - thanos-query-service.yaml
+  - thanos-query-serviceAccount.yaml
+  - thanos-query-serviceMonitor.yaml
+  - thanos-query-deployment.yaml
