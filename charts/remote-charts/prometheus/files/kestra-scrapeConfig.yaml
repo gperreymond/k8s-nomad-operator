@@ -19,7 +19,7 @@ metadata:
   namespace: monitoring
 spec:
   jobName: "kestra-nomad"
-  nomadSdConfigs:
+  NomadSDConfigs:
     - server: "http://192.168.49.21:4646"
       namespace: "kestra-system"
   relabelConfigs:
