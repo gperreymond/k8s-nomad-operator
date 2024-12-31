@@ -5,3 +5,4 @@ namespace: thanos
 resources:
   - ingresses/thanos-store.yaml
   - ingresses/thanos-compact.yaml
+  - ingresses/thanos-query.yaml
