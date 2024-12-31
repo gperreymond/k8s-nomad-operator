@@ -2,13 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: thanos
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: thanos-store
 spec:
   ingressClassName: nginx
   rules:
-  - host: thanos.docker.localhost
+  - host: thanos-store.docker.localhost
     http:
       paths:
       - backend:
@@ -16,5 +14,5 @@ spec:
             name: thanos-store
             port:
               number: 10902
-        path: /store(/|$)(.*)
+        path: /
         pathType: ImplementationSpecific
