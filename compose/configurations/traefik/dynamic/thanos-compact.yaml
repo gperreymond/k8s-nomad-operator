@@ -1,0 +1,11 @@
+http:
+  services:
+    thanos-compact:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://minikube"
+  routers:
+    thanos-compact:
+      rule: "Host(`thanos-compact.docker.localhost`)"
+      service: thanos-compact@file
