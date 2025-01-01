@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/name: thanos-query
     app.kubernetes.io/version: v0.37.2
   name: thanos-query
-  namespace: thanos
 spec:
   ports:
   - name: grpc

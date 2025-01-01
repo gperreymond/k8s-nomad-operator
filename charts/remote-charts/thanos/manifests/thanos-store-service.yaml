@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/name: thanos-store
     app.kubernetes.io/version: v0.37.2
   name: thanos-store
-  namespace: thanos
 spec:
   clusterIP: None
   ports:

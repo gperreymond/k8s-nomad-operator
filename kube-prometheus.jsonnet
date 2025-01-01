@@ -3,13 +3,12 @@ local kp =
   {
     values+:: {
       common+: {
-        namespace: 'monitoring',
+        namespace: 'monitoring-system',
       },
       prometheus+:: {
         namespaces: [
           "kube-system",
-          "monitoring",
-          "thanos",
+          "thanos-system",
           "monitoring-system",
           "kestra-system"
         ],
