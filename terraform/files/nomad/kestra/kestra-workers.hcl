@@ -1,9 +1,11 @@
 variable "kestra_docker_tag" {
   type = string
+  default = "kestra-system"
 }
 
 variable "destination" {
   type = string
+  default = "0.20.7"
 }
 
 job "kestra-workers" {

@@ -17,7 +17,7 @@ YAML
 resource "kubernetes_secret" "thanos_sidecar_objstore_configuration" {
   metadata {
     name      = "thanos-objstore-config"
-    namespace = kubernetes_namespace.monitoring.id
+    namespace = kubernetes_namespace.monitoring_system.id
   }
   data = {
     "thanos.yaml" = local.thanos_objstore_configuration
@@ -30,7 +30,7 @@ resource "kubernetes_secret" "thanos_sidecar_objstore_configuration" {
 resource "kubernetes_secret" "thanos_objstore_configuration" {
   metadata {
     name      = "thanos-objstore-config"
-    namespace = kubernetes_namespace.thanos.id
+    namespace = kubernetes_namespace.thanos_system.id
   }
   data = {
     "thanos.yaml" = local.thanos_objstore_configuration

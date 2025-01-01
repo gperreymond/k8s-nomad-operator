@@ -78,4 +78,3 @@ $ sudo ./scripts/nomad-client.sh
 * https://prometheus-operator.dev/
 * https://prometheus-operator.dev/docs/platform/thanos/
 * https://github.com/thanos-io/kube-thanos/
-* https://github.com/thanos-io/kube-thanos/blob/v0.29.0/kustomization.yaml

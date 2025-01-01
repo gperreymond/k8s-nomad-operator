@@ -54,27 +54,27 @@ resource "kubernetes_manifest" "argocd_applications" {
       git_target_revision = "main"
     }
     prometheus = {
-      destination         = kubernetes_namespace.monitoring.id
+      destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
     alertmanager = {
-      destination         = kubernetes_namespace.monitoring.id
+      destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
     thanos = {
-      destination         = kubernetes_namespace.thanos.id
+      destination         = kubernetes_namespace.thanos_system.id
       git_target_revision = "main"
     }
     kube_state_metrics = {
-      destination         = kubernetes_namespace.monitoring.id
+      destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
     node_exporter = {
-      destination         = kubernetes_namespace.monitoring.id
+      destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
     kubernetes = {
-      destination         = kubernetes_namespace.monitoring.id
+      destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
   }))

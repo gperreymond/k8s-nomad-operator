@@ -17,14 +17,9 @@ resource "kubernetes_namespace" "monitoring_system" {
     name = "monitoring-system"
   }
 }
-resource "kubernetes_namespace" "monitoring" {
+resource "kubernetes_namespace" "thanos_system" {
   metadata {
-    name = "monitoring"
-  }
-}
-resource "kubernetes_namespace" "thanos" {
-  metadata {
-    name = "thanos"
+    name = "thanos-system"
   }
 }
 
@@ -46,8 +41,7 @@ resource "null_resource" "namespaces" {
     kubernetes_namespace.argo_system,
     kubernetes_namespace.kestra_system,
     kubernetes_namespace.monitoring_system,
-    kubernetes_namespace.monitoring,
-    kubernetes_namespace.thanos,
+    kubernetes_namespace.thanos_system,
     // nomad
     nomad_namespace.kestra_system,
     nomad_namespace.monitoring_system,
