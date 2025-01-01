@@ -13,8 +13,8 @@
       "echo 'Welcome to devbox!' > /dev/null"
     ],
     "scripts": {
-      "jsonnet:build": [
-        "./scripts/jsonnet-build.sh"
+      "kube-prometheus:build": [
+        "./scripts/kube-prometheus-build.sh"
       ],
       "docker-compose:config": [
         "docker compose --env-file compose/global.vars config"
