@@ -21,6 +21,7 @@ spec:
   jobName: "kestra-nomad"
   NomadSDConfigs:
     - server: "http://192.168.49.21:4646"
+      region: europe
       namespace: "kestra-system"
   metricRelabelings:
     - sourceLabels: [__meta_nomad_job_name]

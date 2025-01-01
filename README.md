@@ -30,7 +30,8 @@ $ terraform apply
 $ go install github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
 $ go install github.com/brancz/gojsontoyaml@latest
 $ ~/go/bin/jb install
-$ devbox run jsonnet:build
+$ devbox run kube-prometheus:build
+$ devbox run kube-thanos:build
 ```
 
 ## Utils
