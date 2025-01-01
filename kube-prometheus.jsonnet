@@ -7,6 +7,7 @@ local kp =
       },
       prometheus+:: {
         namespaces: [
+          "default",
           "kube-system",
           "thanos-system",
           "monitoring-system",
