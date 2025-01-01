@@ -8,13 +8,13 @@ metadata:
     app.kubernetes.io/part-of: kube-prometheus
     app.kubernetes.io/version: 2.54.1
   name: k8s
-  
+  namespace: monitoring-system
 spec:
   alerting:
     alertmanagers:
     - apiVersion: v2
       name: alertmanager-main
-      
+      namespace: monitoring-system
       port: web
   enableFeatures: []
   externalLabels: {}

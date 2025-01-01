@@ -18,7 +18,7 @@ items:
   subjects:
   - kind: ServiceAccount
     name: prometheus-k8s
-    
+    namespace: monitoring-system
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
@@ -29,7 +29,7 @@ items:
       app.kubernetes.io/part-of: kube-prometheus
       app.kubernetes.io/version: 2.54.1
     name: prometheus-k8s
-    
+    namespace: thanos-system
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: Role
@@ -37,7 +37,7 @@ items:
   subjects:
   - kind: ServiceAccount
     name: prometheus-k8s
-    
+    namespace: monitoring-system
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
@@ -48,7 +48,7 @@ items:
       app.kubernetes.io/part-of: kube-prometheus
       app.kubernetes.io/version: 2.54.1
     name: prometheus-k8s
-    namespace: thanos
+    namespace: monitoring-system
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: Role
@@ -56,26 +56,7 @@ items:
   subjects:
   - kind: ServiceAccount
     name: prometheus-k8s
-    
-- apiVersion: rbac.authorization.k8s.io/v1
-  kind: RoleBinding
-  metadata:
-    labels:
-      app.kubernetes.io/component: prometheus
-      app.kubernetes.io/instance: k8s
-      app.kubernetes.io/name: prometheus
-      app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 2.54.1
-    name: prometheus-k8s
-    -system
-  roleRef:
-    apiGroup: rbac.authorization.k8s.io
-    kind: Role
-    name: prometheus-k8s
-  subjects:
-  - kind: ServiceAccount
-    name: prometheus-k8s
-    
+    namespace: monitoring-system
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
@@ -94,5 +75,5 @@ items:
   subjects:
   - kind: ServiceAccount
     name: prometheus-k8s
-    
+    namespace: monitoring-system
 kind: RoleBindingList
