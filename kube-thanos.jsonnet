@@ -25,15 +25,6 @@ local commonConfig = {
   },
 };
 
-local sc = t.sidecar(commonConfig {
-  namespace: 'monitoring-system',
-  serviceMonitor: true,
-  serviceLabelSelector: {
-    "app.kubernetes.io/part-of": "kube-prometheus",
-    "app.kubernetes.io/component": "thanos-sidecar"
-  }
-});
-
 local c = t.compact(commonConfig.config {
   replicas: 1,
   serviceMonitor: true,
@@ -59,8 +50,8 @@ local q = t.query(commonConfig.config {
   queryTimeout: "5m",
   lookbackDelta: "15m",
   stores: [
-    'dnssrv+_grpc._tcp.%s.%s.svc.cluster.local' % [service.metadata.name, service.metadata.namespace]
-    for service in [sc.service, s.service]
+    "dnssrv+_grpc._tcp.prometheus-k8s-thanos-sidecar.monitoring-system.svc.cluster.local",
+    s.storeEndpoint
   ]
 });
 
