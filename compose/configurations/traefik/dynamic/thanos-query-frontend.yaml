@@ -1,0 +1,11 @@
+http:
+  services:
+    thanos-query-frontend:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://minikube"
+  routers:
+    thanos-query-frontend:
+      rule: "Host(`thanos-query-frontend.docker.localhost`)"
+      service: thanos-query-frontend@file
