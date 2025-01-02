@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: query-cache
+    app.kubernetes.io/instance: thanos-query-frontend
+    app.kubernetes.io/name: thanos-query-frontend
+    app.kubernetes.io/version: v0.37.2
+  name: thanos-query-frontend
+  namespace: thanos-system
+spec:
+  endpoints:
+  - port: http
+    relabelings:
+    - separator: /
+      sourceLabels:
+      - namespace
+      - pod
+      targetLabel: instance
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: query-cache
+      app.kubernetes.io/instance: thanos-query-frontend
+      app.kubernetes.io/name: thanos-query-frontend

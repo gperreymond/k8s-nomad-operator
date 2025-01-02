@@ -50,12 +50,37 @@ local q = t.query(commonConfig.config {
   queryTimeout: "5m",
   lookbackDelta: "15m",
   stores: [
-    "dnssrv+_grpc._tcp.prometheus-k8s-thanos-sidecar.monitoring-system.svc.cluster.local",
+    "dnssrv+_grpc._tcp.prometheus-k8s-thanos-sidecar.monitoring-system.svc.cluster.local:10901",
     s.storeEndpoint
   ]
 });
 
+local qf = t.queryFrontend(commonConfig.config {
+  replicas: 1,
+  downstreamURL: 'http://%s.%s.svc.cluster.local.:%d' % [
+    q.service.metadata.name,
+    q.service.metadata.namespace,
+    q.service.spec.ports[1].port,
+  ],
+  splitInterval: '12h',
+  maxRetries: 10,
+  logQueriesLongerThan: '10s',
+  serviceMonitor: true,
+  // queryRangeCache: {
+  //   type: 'memcached',
+  //   config+: {
+  //     addresses: ['dnssrv+_client._tcp.<MEMCACHED_SERVICE>.%s.svc.cluster.local' % commonConfig.namespace],
+  //   },
+  // },
+  // labelsCache: {
+  //   type: 'memcached',
+  //   config+: {
+  //     addresses: ['dnssrv+_client._tcp.<MEMCACHED_SERVICE>.%s.svc.cluster.local' % commonConfig.namespace],
+  //   },
+  // },
+});
+
 { ['thanos-compact-' + name]: c[name] for name in std.objectFields(c) } +
 { ['thanos-store-' + name]: s[name] for name in std.objectFields(s) } +
-{ ['thanos-query-' + name]: q[name] for name in std.objectFields(q) }
-
+{ ['thanos-query-' + name]: q[name] for name in std.objectFields(q) } +
+{ ['thanos-query-frontend-' + name]: qf[name] for name in std.objectFields(qf) if qf[name] != null }
