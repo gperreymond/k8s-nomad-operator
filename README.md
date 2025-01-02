@@ -48,6 +48,8 @@ $ kubectl -n argo-system get secret argocd-initial-admin-secret -o jsonpath="{.d
 * http://monitoring.docker.localhost/prometheus/
 * http://thanos-store.docker.localhost/
 * http://thanos-compact.docker.localhost/
+* http://thanos-query.docker.localhost/
+* http://thanos-query-frontend.docker.localhost/
 * http://kestra.docker.localhost/
 * http://nomad.europe-paris.docker.localhost/
 
