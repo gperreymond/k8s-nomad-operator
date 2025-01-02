@@ -16,6 +16,9 @@
       "kube-prometheus:build": [
         "./scripts/kube-prometheus-build.sh"
       ],
+      "kube-thanos:build": [
+        "./scripts/kube-thanos-build.sh"
+      ],
       "docker-compose:config": [
         "docker compose --env-file compose/global.vars config"
       ],

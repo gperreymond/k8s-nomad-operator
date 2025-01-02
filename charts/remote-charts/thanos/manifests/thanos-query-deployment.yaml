@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/name: thanos-query
     app.kubernetes.io/version: v0.37.2
   name: thanos-query
+  namespace: thanos-system
 spec:
   replicas: 1
   selector:
@@ -33,7 +34,7 @@ spec:
                   values:
                   - thanos-query
               namespaces:
-              - thanos
+              - thanos-system
               topologyKey: kubernetes.io/hostname
             weight: 100
       containers:
@@ -41,27 +42,14 @@ spec:
         - query
         - --grpc-address=0.0.0.0:10901
         - --http-address=0.0.0.0:9090
-        - --log.level=debug
+        - --log.level=info
         - --log.format=logfmt
         - --query.replica-label=prometheus_replica
         - --query.replica-label=rule_replica
-        # - --store=dnssrv+_grpc._tcp.thanos-receive.thanos.svc.cluster.local
-        # - --store=dnssrv+_grpc._tcp.thanos-rule.thanos.svc.cluster.local
-        - --store=dnssrv+_grpc._tcp.prometheus-k8s-thanos-sidecar.monitoring.svc.cluster.local
-        - --store=dnssrv+_grpc._tcp.thanos-store.thanos.svc.cluster.local
-        # - --store=dnssrv+_grpc._tcp.thanos-receive-default.thanos.svc.cluster.local
-        # - --store=dnssrv+_grpc._tcp.thanos-receive-region-1.thanos.svc.cluster.local
-        # - --store=dnssrv+_grpc._tcp.thanos-store-0.thanos.svc.cluster.local
-        # - --store=dnssrv+_grpc._tcp.thanos-store-1.thanos.svc.cluster.local
-        # - --store=dnssrv+_grpc._tcp.thanos-store-2.thanos.svc.cluster.local
+        - --store=dnssrv+_grpc._tcp.thanos-sidecar.monitoring-system.svc.cluster.local
+        - --store=dnssrv+_grpc._tcp.thanos-store.thanos-system.svc.cluster.local
         - --query.timeout=5m
         - --query.lookback-delta=15m
-        - |-
-          --tracing.config="config":
-            "sampler_param": 2
-            "sampler_type": "ratelimiting"
-            "service_name": "thanos-query"
-          "type": "JAEGER"
         - --query.auto-downsampling
         env:
         - name: HOST_IP_ADDRESS

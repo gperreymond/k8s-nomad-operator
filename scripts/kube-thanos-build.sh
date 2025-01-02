@@ -1,11 +1,9 @@
-#!/bin/bash
-
 set -euo pipefail
 
 # Configuration
 BUILD_DIR="build"
 CHARTS_DIR="charts/remote-charts"
-JSONNET_FILE="kube-prometheus.jsonnet"
+JSONNET_FILE="kube-thanos.jsonnet"
 
 # Preliminary checks
 command -v jsonnet >/dev/null || { echo "[ERROR] jsonnet is required but not found."; exit 1; }
@@ -21,7 +19,7 @@ log() {
 # Directory preparation
 log "INFO" "Cleaning up directories..."
 rm -rf "$BUILD_DIR"
-mkdir -p "$BUILD_DIR/manifests/setup"
+mkdir -p "$BUILD_DIR/manifests"
 
 # Generate manifests
 log "INFO" "Generating manifests using jsonnet..."
@@ -71,12 +69,7 @@ process_manifests() {
 }
 
 # Process specific prefixes
-process_manifests "prometheus-operator"
-process_manifests "alertmanager"
-process_manifests "kube-state-metrics"
-process_manifests "prometheus"
-process_manifests "node-exporter"
-process_manifests "kubernetes"
+process_manifests "thanos"
 
 # Final cleanup
 rm -rf "$BUILD_DIR"
