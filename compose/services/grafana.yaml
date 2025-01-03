@@ -1,0 +1,53 @@
+services:
+
+  grafana-postgres:
+    image: 'postgres:14.15-alpine'
+    container_name: 'grafana-postgres'
+    environment:
+      POSTGRES_DB: 'grafana'
+      POSTGRES_USER: 'grafana'
+      POSTGRES_PASSWORD: 'changeme'
+    volumes:
+      - 'grafana_postgres_data:/var/lib/postgresql/data'
+    networks:
+      minikube: {}
+
+  grafana-memcached:
+    image: 'memcached:1.6.34-alpine'
+    container_name: 'grafana-memcached'
+    networks:
+      minikube: {}
+
+  grafana-1:
+    image: 'grafana/grafana:11.4.0'
+    container_name: 'grafana-1'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.grafana.rule=Host(`grafana.docker.localhost`)'
+      - 'traefik.http.routers.grafana.entrypoints=web'
+      - 'traefik.http.services.grafana.loadbalancer.server.port=3000'
+    volumes:
+      - '../configurations/grafana/grafana.ini:/etc/grafana/grafana.ini:ro'
+    extra_hosts:
+      - 'thanos-query-frontend.docker.localhost:${IP_TRAEFIK}'
+    networks:
+      minikube: {}
+  
+  grafana-2:
+    image: 'grafana/grafana:11.4.0'
+    container_name: 'grafana-2'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.grafana.rule=Host(`grafana.docker.localhost`)'
+      - 'traefik.http.routers.grafana.entrypoints=web'
+      - 'traefik.http.services.grafana.loadbalancer.server.port=3000'
+    volumes:
+      - '../configurations/grafana/grafana.ini:/etc/grafana/grafana.ini:ro'
+    extra_hosts:
+      - 'thanos-query-frontend.docker.localhost:${IP_TRAEFIK}'
+    networks:
+      minikube: {}
+
+volumes:
+
+  grafana_postgres_data: {}

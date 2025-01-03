@@ -77,6 +77,7 @@ $ sudo ./scripts/nomad-client.sh
 
 ## Documentations
 
+* https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
 * https://runbooks.prometheus-operator.dev/
 * https://github.com/prometheus-operator/kube-prometheus/
 * https://prometheus-operator.dev/
