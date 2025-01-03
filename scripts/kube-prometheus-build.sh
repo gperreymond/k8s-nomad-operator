@@ -77,6 +77,7 @@ process_manifests "kube-state-metrics"
 process_manifests "prometheus"
 process_manifests "node-exporter"
 process_manifests "kubernetes"
+process_manifests "grafana"
 
 # Final cleanup
 rm -rf "$BUILD_DIR"

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - grafana-config.yaml
+  - grafana-dashboardDatasources.yaml
+  - grafana-dashboardDefinitions.yaml
+  - grafana-dashboardSources.yaml
+  - grafana-deployment.yaml
+  - grafana-networkPolicy.yaml
+  - grafana-prometheusRule.yaml
+  - grafana-serviceAccount.yaml
+  - grafana-serviceMonitor.yaml
+  - grafana-service.yaml

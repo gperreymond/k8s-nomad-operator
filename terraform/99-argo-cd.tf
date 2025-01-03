@@ -81,6 +81,10 @@ resource "kubernetes_manifest" "argocd_applications" {
       destination         = kubernetes_namespace.monitoring_system.id
       git_target_revision = "main"
     }
+    grafana = {
+      destination         = kubernetes_namespace.monitoring_system.id
+      git_target_revision = "main"
+    }
     thanos = {
       destination         = kubernetes_namespace.thanos_system.id
       git_target_revision = "main"
