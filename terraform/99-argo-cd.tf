@@ -4,6 +4,26 @@ locals {
   HELM_KESTRA_VERSION            = "0.20.7"
 }
 
+resource "kubernetes_secret" "helm_oci_bitnamicharts" {
+  metadata {
+    name      = "helm-oci-bitnamicharts"
+    namespace = kubernetes_namespace.argo_system.id
+    labels = {
+      "argocd.argoproj.io/secret-type" = "repository"
+    }
+  }
+  data = {
+    url = "registry-1.docker.io/bitnamicharts"
+    name = "bitnamicharts"
+    type = "helm"
+    enableOCI = "true"
+  }
+
+  depends_on = [
+    null_resource.monitoring,
+  ]
+}
+
 resource "helm_release" "argo_cd" {
   name       = "argo-cd"
   repository = "oci://ghcr.io/argoproj/argo-helm"
@@ -64,6 +84,10 @@ resource "kubernetes_manifest" "argocd_applications" {
     thanos = {
       destination         = kubernetes_namespace.thanos_system.id
       git_target_revision = "main"
+      memcached = {
+        chart_target_revision = "7.6.1"
+        values_target_revision = "main"
+      }
     }
     kube_state_metrics = {
       destination         = kubernetes_namespace.monitoring_system.id

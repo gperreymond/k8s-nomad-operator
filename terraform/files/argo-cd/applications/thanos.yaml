@@ -16,6 +16,16 @@ spec:
     - repoURL: https://github.com/gperreymond/k8s-nomad-operator.git
       path: charts/remote-charts/thanos
       targetRevision: ${thanos.git_target_revision}
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: memcached
+      targetRevision: ${thanos.memcached.chart_target_revision}
+      helm:
+        releaseName: thanos-memcached
+        valueFiles:
+          - $memcached_values/charts/remote-values/thanos-memcached/values.yaml
+    - repoURL: 'https://github.com/gperreymond/k8s-nomad-operator.git'
+      targetRevision: ${thanos.memcached.values_target_revision}
+      ref: memcached_values
   destination:
     server: https://kubernetes.default.svc
     namespace: ${thanos.destination}
