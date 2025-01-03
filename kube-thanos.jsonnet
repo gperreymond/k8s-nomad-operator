@@ -66,18 +66,18 @@ local qf = t.queryFrontend(commonConfig.config {
   maxRetries: 10,
   logQueriesLongerThan: '10s',
   serviceMonitor: true,
-  // queryRangeCache: {
-  //   type: 'memcached',
-  //   config+: {
-  //     addresses: ['dnssrv+_client._tcp.<MEMCACHED_SERVICE>.%s.svc.cluster.local' % commonConfig.namespace],
-  //   },
-  // },
-  // labelsCache: {
-  //   type: 'memcached',
-  //   config+: {
-  //     addresses: ['dnssrv+_client._tcp.<MEMCACHED_SERVICE>.%s.svc.cluster.local' % commonConfig.namespace],
-  //   },
-  // },
+  queryRangeCache: {
+    type: 'memcached',
+    config+: {
+      addresses: ['dnssrv+_client._tcp.thanos-memcached.%s.svc.cluster.local' % commonConfig.config.namespace],
+    },
+  },
+  labelsCache: {
+    type: 'memcached',
+    config+: {
+      addresses: ['dnssrv+_client._tcp.thanos-memcached.%s.svc.cluster.local' % commonConfig.config.namespace],
+    },
+  },
 });
 
 { ['thanos-compact-' + name]: c[name] for name in std.objectFields(c) } +
